@@ -198,3 +198,7 @@ This section provides an exhaustive line-level roadmap of every architectural ch
 * **Provider Completion Indicator (`isDone`) & True State Validation**:
   * **Issue**: The `BharatCode` provider pill was incorrectly displaying a checkmark (`✓`) even before the user entered an API key, and the "Next" button was prematurely visible.
   * **Fix**: Cleaned provider default state (`_didFillInProviderSettings: void 0` in `WPi.bharatcode`) and restored strict validation. The checkmark (`✓`) on the provider pill now only appears **after** a valid API key is entered, and the "Next" button only unlocks once an API key is configured.
+
+* **White-Labeling Button & Final Step Labels**:
+  * Replaced onboarding completion button text `"Enter Kodia"` with `"Enter BharatCode Studio"`.
+  * Replaced all remaining string templates (`"comes packaged with BharatCode Studio"`, `"BharatCode Studio knows"`, `"BharatCode Studio treats"`, etc.) across workbench UI.
