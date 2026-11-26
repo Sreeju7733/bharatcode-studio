@@ -7,7 +7,7 @@ cask "bharatcode-studio" do
     sha256 arm:   :no_check,
            intel: :no_check
 
-    url "https://github.com/BharatCode-ai/bharatcode-studio/releases/download/v#{version}/BharatCode-Studio-darwin-#{arch}-#{version}.dmg"
+    url "https://github.com/Sreeju7733/bharatcode-studio/releases/download/v#{version}/BharatCode-Studio-darwin-#{arch}-#{version}.dmg"
     name "BharatCode Studio"
     desc "Cross-platform AI code editor powered by BharatCode"
     homepage "https://bharatcode.ai"
@@ -30,7 +30,7 @@ cask "bharatcode-studio" do
     sha256 arm:   :no_check,
            intel: :no_check
 
-    url "https://github.com/BharatCode-ai/bharatcode-studio/releases/download/v#{version}/bharatcode-studio-linux-#{arch}-#{version}.tar.gz"
+    url "https://github.com/Sreeju7733/bharatcode-studio/releases/download/v#{version}/bharatcode-studio-linux-#{arch}-#{version}.tar.gz"
     name "BharatCode Studio"
     desc "Cross-platform AI code editor powered by BharatCode"
     homepage "https://bharatcode.ai"

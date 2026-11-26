@@ -4,10 +4,10 @@ PackageVersion: 1.0.0
 PackageName: BharatCode Studio
 Publisher: BharatCode
 PublisherUrl: https://bharatcode.ai
-PublisherSupportUrl: https://github.com/BharatCode-ai/bharatcode-studio/issues
+PublisherSupportUrl: https://github.com/Sreeju7733/bharatcode-studio/issues
 Author: BharatCode
 License: MIT
-LicenseUrl: https://github.com/BharatCode-ai/bharatcode-studio/blob/main/LICENSE.txt
+LicenseUrl: https://github.com/Sreeju7733/bharatcode-studio/blob/main/LICENSE.txt
 ShortDescription: Cross-platform AI code editor powered by BharatCode
 Description: BharatCode Studio is a fork of VS Code and Kodia with native integration of BharatCode models including glm-5.3-flash and deepseek-v4.1-flash.
 Tags:
@@ -23,12 +23,12 @@ Installers:
   - Architecture: x64
     InstallerType: inno
     Scope: user
-    InstallerUrl: https://github.com/BharatCode-ai/bharatcode-studio/releases/download/v1.0.0/BharatCode-Studio-User-Setup-x64-1.0.0.exe
+    InstallerUrl: https://github.com/Sreeju7733/bharatcode-studio/releases/download/v1.0.0/BharatCode-Studio-User-Setup-x64-1.0.0.exe
     InstallerSha256: 0000000000000000000000000000000000000000000000000000000000000000
     UpgradeBehavior: install
   - Architecture: arm64
     InstallerType: inno
     Scope: user
-    InstallerUrl: https://github.com/BharatCode-ai/bharatcode-studio/releases/download/v1.0.0/BharatCode-Studio-User-Setup-arm64-1.0.0.exe
+    InstallerUrl: https://github.com/Sreeju7733/bharatcode-studio/releases/download/v1.0.0/BharatCode-Studio-User-Setup-arm64-1.0.0.exe
     InstallerSha256: 0000000000000000000000000000000000000000000000000000000000000000
     UpgradeBehavior: install
