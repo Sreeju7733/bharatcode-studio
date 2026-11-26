@@ -139,7 +139,8 @@ const newOpenAICompatibleSDK = async ({ settingsOfProvider, providerName }: { se
 	if (providerName === 'bharatcode') {
 		const thisConfig = settingsOfProvider[providerName]
 		const apiKey = thisConfig.apiKey || process.env.BHARATCODE_API_KEY || ''
-		return new OpenAI({ baseURL: 'https://bharatcode.ai/api/model/v1', apiKey, ...commonPayloadOpts })
+		const baseURL = process.env.BHARATCODE_BASE_URL || 'https://bharatcode.ai/api/model/v1'
+		return new OpenAI({ baseURL, apiKey, timeout: 120_000, maxRetries: 2, ...commonPayloadOpts })
 	}
 	else if (providerName === 'openAI') {
 		const thisConfig = settingsOfProvider[providerName]
@@ -773,8 +774,14 @@ const _sendOpenAICompatibleChat = async ({ messages, onText, onFinalMessage, onE
 		})
 		// when error/fail - this catches errors of both .create() and .then(for await)
 		.catch(error => {
-			if (error instanceof OpenAI.APIError && error.status === 401) { onError({ message: invalidApiKeyMessage(providerName), fullError: error }); }
-			else { onError({ message: providerName === 'mlx' ? mlxErrorWithHint(error + '') : error + '', fullError: error }); }
+			const errStr = error + ''
+			if (error instanceof OpenAI.APIError && error.status === 401) {
+				onError({ message: invalidApiKeyMessage(providerName), fullError: error });
+			} else if (errStr.includes('timed out') || errStr.includes('Timeout')) {
+				onError({ message: "Request to " + providerName + " (" + modelName + ") timed out. The model server is taking too long to respond. Please try switching models (e.g. to deepseek-v4.1-flash) or retry shortly.", fullError: error });
+			} else {
+				onError({ message: providerName === 'mlx' ? mlxErrorWithHint(errStr) : errStr, fullError: error });
+			}
 		})
 }
 
