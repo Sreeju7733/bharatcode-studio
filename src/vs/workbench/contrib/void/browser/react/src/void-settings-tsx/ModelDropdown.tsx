@@ -61,7 +61,7 @@ const MemoizedModelDropdown = ({ featureName, className }: { featureName: Featur
 	useEffect(() => {
 		const oldOptions = oldOptionsRef.current
 		const options = settingsState._modelOptions.filter((o) => filter(o.selection, { chatMode: settingsState.globalSettings.chatMode, overridesOfModel: settingsState.overridesOfModel }))
-		// Kodia: OpenRouter's free models first, a line under them
+		// BharatCode Studio: OpenRouter's free models first, a line under them
 		const newOptions = [...options.filter(isFree), ...options.filter(o => !isFree(o))]
 
 		if (!optionsEqual(oldOptions, newOptions)) {

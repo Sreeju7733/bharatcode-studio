@@ -19,7 +19,7 @@ import { IKodiaWindowsService, KODIA_WINDOWS_CHANNEL } from '../../platform/wind
 
 (function registerWorkbenchContributions(): void {
 	registerWorkbenchContribution2(OpenInVSCodeWidgetContribution.ID, OpenInVSCodeWidgetContribution, WorkbenchPhase.BlockRestore);
-	// Kodia: "Manage Models..." opens Kodia's settings in an editor window
+	// BharatCode Studio: "Manage Models..." opens BharatCode Studio's settings in an editor window
 	registerWorkbenchContribution2(KodiaManageModelsContribution.ID, KodiaManageModelsContribution, WorkbenchPhase.BlockRestore);
 })();
 

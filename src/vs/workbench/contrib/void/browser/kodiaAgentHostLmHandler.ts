@@ -25,7 +25,7 @@ import { IVoidSettingsService } from '../common/voidSettingsService.js';
 import { displayInfoOfProviderName, ModelSelection, ProviderName, providerNames } from '../common/voidSettingsTypes.js';
 
 /**
- * Serves the Kodia agent of the Agents Window with Kodia's own LLM service, so
+ * Serves the BharatCode Studio agent of the Agents Window with BharatCode Studio's own LLM service, so
  * it can run every model shown in Kodia's model dropdown, whatever its
  * provider. See {@link IKodiaAgentHostLmHandler}. Editor windows and the
  * Agents Window both register it (see `kodiaAgentsWindow.contribution.ts`).
@@ -77,7 +77,7 @@ class KodiaAgentHostLmHandler extends Disposable implements IKodiaAgentHostLmHan
 		return this._editorTools.tools ? [...editorToolNames] : [];
 	}
 
-	async callEditorTool(name: string, argsJson: string): Promise<IKodiaMcpToolResult> {
+	async callEditorTool(name: string, argsJson: string): Promise<IBharatCode StudioMcpToolResult> {
 		const tools = this._editorTools.tools;
 		if (!tools) {
 			return { isError: true, output: `"${name}" needs an editor window, and this window has none.` };
@@ -92,7 +92,7 @@ class KodiaAgentHostLmHandler extends Disposable implements IKodiaAgentHostLmHan
 		return tools.call(name, params);
 	}
 
-	// What the user switched on in Kodia's settings ("Auto-approve"), as the chat honors it: the agent asks about the rest.
+	// What the user switched on in BharatCode Studio's settings ("Auto-approve"), as the chat honors it: the agent asks about the rest.
 	async getAutoApprove(): Promise<IKodiaAutoApprove> {
 		await this._voidSettingsService.waitForInitState;
 		const { autoApprove } = this._voidSettingsService.state.globalSettings;
@@ -107,7 +107,7 @@ class KodiaAgentHostLmHandler extends Disposable implements IKodiaAgentHostLmHan
 	async listModels(): Promise<IByokLmModelInfo[]> {
 		await this._voidSettingsService.waitForInitState;
 		// `_modelOptions` is every model switched on for a provider that is set up
-		// ("Show in Dropdown" in Kodia settings): Gemini, MLX, OpenRouter, and the rest.
+		// ("Show in Dropdown" in BharatCode Studio settings): Gemini, MLX, OpenRouter, and the rest.
 		const { _modelOptions, overridesOfModel } = this._voidSettingsService.state;
 		return _modelOptions.map(({ name, selection: { providerName, modelName } }) => {
 			const { contextWindow, supportsVision } = getModelCapabilities(providerName, modelName, overridesOfModel);
@@ -121,13 +121,13 @@ class KodiaAgentHostLmHandler extends Disposable implements IKodiaAgentHostLmHan
 		return this.chatStream(request, () => { }, token);
 	}
 
-	// `onText` of Kodia's LLM service holds the whole text and reasoning so far: the agent is sent what each adds.
+	// `onText` of BharatCode Studio's LLM service holds the whole text and reasoning so far: the agent is sent what each adds.
 	async chatStream(request: IByokLmChatRequest, onDelta: (delta: IByokLmChatDelta) => void, token: CancellationToken): Promise<IByokLmChatResult> {
 		if (!(providerNames as readonly string[]).includes(request.vendor)) {
-			return { output: [], error: `Unknown Kodia provider: ${request.vendor}` };
+			return { output: [], error: `Unknown BharatCode Studio provider: ${request.vendor}` };
 		}
 		const modelSelection: ModelSelection = { providerName: request.vendor as ProviderName, modelName: request.modelId };
-		// An editor window starts Kodia's MLX server; the Agents Window may be the only window open.
+		// An editor window starts BharatCode Studio's MLX server; the Agents Window may be the only window open.
 		if (modelSelection.providerName === 'mlx' && this._voidSettingsService.state.globalSettings.autoSetupMlx) {
 			await this._mlxService.ensureReady({ installIfMissing: false, startServer: true }).catch(() => undefined);
 		}

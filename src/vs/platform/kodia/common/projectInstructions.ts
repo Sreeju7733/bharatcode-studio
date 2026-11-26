@@ -5,13 +5,13 @@
 
 import { URI } from '../../../base/common/uri.js';
 
-// The project's own instructions (rules files, agent skills), shared by Kodia's chat and the Kodia agent of the
+// The project's own instructions (rules files, agent skills), shared by BharatCode Studio's chat and the Kodia agent of the
 // Agents window: the chat reads them through the editor's services, the agent host from disk.
 
 export const KODIA_SKILLS_FOLDER = '.kodia/skills'
 
 
-// The instruction files read from the root of each workspace folder: Kodia's own, then the ones
+// The instruction files read from the root of each workspace folder: BharatCode Studio's own, then the ones
 // other agents use, so a project set up for Codex, Claude Code, Cursor or Windsurf works as is
 export const PROJECT_RULES_FILE_NAMES = ['.bharatcoderules', '.voidrules', 'AGENTS.md', 'CLAUDE.md', '.cursorrules', '.windsurfrules'] as const
 

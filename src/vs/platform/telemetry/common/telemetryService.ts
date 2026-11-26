@@ -281,7 +281,7 @@ function getTelemetryLevelSettingDescription(): string {
 	const restartString = !isWeb ? localize('telemetry.restart', 'Microsoft says \"Some third party extensions might not respect this setting. Consult the specific extension\'s documentation to be sure. A full restart of the application is necessary for crash reporting changes to take effect.\"') : '';
 
 
-	// Kodia removed these
+	// BharatCode Studio removed these
 	// const crashReportsHeader = localize('telemetry.crashReports', "Crash Reports");
 	// const errorsHeader = localize('telemetry.errors', "Error Telemetry");
 	// const usageHeader = localize('telemetry.usage', "Usage Data");
@@ -302,7 +302,7 @@ ${telemetryText}
 
 ${restartString}
 
-Kodia separately records basic usage like the number of messages people are sending. If you'd like to disable Kodia metrics, you may do so in Kodia's Settings.
+BharatCode Studio separately records basic usage like the number of messages people are sending. If you'd like to disable BharatCode Studio metrics, you may do so in BharatCode Studio's Settings.
 `;
 
 	return telemetryDescription;

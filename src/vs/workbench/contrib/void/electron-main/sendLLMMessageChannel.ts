@@ -81,12 +81,12 @@ export class LLMMessageChannel implements IServerChannel {
 			else if (command === 'openAICompatibleList') {
 				this._callOpenAICompatibleList(params)
 			}
-			// Kodia: a cloud provider's list of models, with the user's key
+			// BharatCode Studio: a cloud provider's list of models, with the user's key
 			else if (command === 'listProviderModels') {
 				return await listProviderModels(params.providerName, params.apiKey)
 			}
 			else {
-				throw new Error(`Kodia sendLLM: command "${command}" not recognized.`)
+				throw new Error(`BharatCode Studio sendLLM: command "${command}" not recognized.`)
 			}
 		}
 		catch (e) {

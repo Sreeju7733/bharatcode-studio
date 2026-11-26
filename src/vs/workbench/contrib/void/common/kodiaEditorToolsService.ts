@@ -10,8 +10,8 @@ import type { IKodiaMcpToolResult } from '../../../../platform/agentHost/common/
 import type { EditorToolName } from '../../../../platform/kodia/common/toolCatalog.js';
 import type { RawToolParamsObj } from './sendLLMMessageTypes.js';
 
-// Which window can run the editor tools (the language server's, the lint errors) for the Kodia agent of the Agents
-// Window. Every Kodia window answers the agent, but only an editor window has the tools: the Agents Window loads just
+// Which window can run the editor tools (the language server's, the lint errors) for the BharatCode Studio agent of the Agents
+// Window. Every BharatCode Studio window answers the agent, but only an editor window has the tools: the Agents Window loads just
 // this small service, which then has none to offer, and an editor window's tools service provides them.
 
 /** Runs an editor tool the way the chat does, in this window. */

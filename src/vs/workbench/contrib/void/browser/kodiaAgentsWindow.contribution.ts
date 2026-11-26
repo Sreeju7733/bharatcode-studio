@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------*/
 
 // What the Agents Window loads of Kodia, so that it works with no editor window open: Kodia's
-// settings and LLM service, which run the Kodia agent's model requests.
+// settings and LLM service, which run the BharatCode Studio agent's model requests.
 // Editor windows load all of Kodia (void.contribution.ts).
 
 import '../common/voidSettingsService.js'

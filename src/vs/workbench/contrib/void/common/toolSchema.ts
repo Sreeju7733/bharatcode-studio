@@ -7,7 +7,7 @@ import type { InternalToolInfo } from './prompt/prompts.js';
 
 // The parameters of a tool, as the providers are told them. A tool that has a JSON Schema (an MCP server's tool, a tool
 // of the Agents window's agent) keeps the types and the required parameters it declares; one that has only parameter
-// descriptions (Kodia's own chat tools) has every parameter as a string, none required.
+// descriptions (BharatCode Studio's own chat tools) has every parameter as a string, none required.
 //
 // A schema is reduced to what every provider accepts: Gemini takes only a subset of JSON Schema, OpenAI-compatible
 // servers differ in what they check. What can't be said in that subset (`$ref`, `allOf`, an object with no declared

@@ -8,7 +8,7 @@ import { localize } from '../../../nls.js';
 import { IProductService } from '../../product/common/productService.js';
 
 export function createNativeAboutDialogDetails(productService: IProductService): { title: string; details: string; detailsToCopy: string } {
-	// Use the Kodia version from productService
+	// Use the BharatCode Studio version from productService
 	const voidVersion = productService.voidVersion || '1.5.0';
 	let version = productService.version;
 	if (productService.target) {

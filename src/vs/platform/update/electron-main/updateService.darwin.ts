@@ -23,7 +23,7 @@ import { AbstractUpdateService, createUpdateURL, getUpdateRequestHeaders, IUpdat
 
 export class DarwinUpdateService extends AbstractUpdateService implements IRelaunchHandler {
 
-	/** Kodia: the feed's update Electron's autoUpdater was started for, which its events do not fully describe. */
+	/** BharatCode Studio: the feed's update Electron's autoUpdater was started for, which its events do not fully describe. */
 	private feedUpdate: IUpdate | undefined;
 
 	@memoize private get onRawError(): Event<string> { return Event.fromNodeEventEmitter(electron.autoUpdater, 'error', (_, message) => message); }
@@ -98,7 +98,7 @@ export class DarwinUpdateService extends AbstractUpdateService implements IRelau
 	}
 
 	protected buildUpdateFeedUrl(quality: string, commit: string, options?: IUpdateURLOptions): string | undefined {
-		const assetID = this.productService.darwinUniversalAssetId ?? (process.arch === 'x64' ? 'darwin-x64' : 'darwin-arm64'); // Kodia: darwin-x64, not darwin
+		const assetID = this.productService.darwinUniversalAssetId ?? (process.arch === 'x64' ? 'darwin-x64' : 'darwin-arm64'); // BharatCode Studio: darwin-x64, not darwin
 		const url = createUpdateURL(this.productService.updateUrl!, assetID, quality, commit, options);
 		const headers = getUpdateRequestHeaders(this.productService.version);
 		try {
@@ -117,7 +117,7 @@ export class DarwinUpdateService extends AbstractUpdateService implements IRelau
 			return;
 		}
 
-		// Kodia: read before the state changes, to compare the feed with the update being overwritten
+		// BharatCode Studio: read before the state changes, to compare the feed with the update being overwritten
 		const baseline = this.getBaselineUpdate(pendingCommit);
 		const overwriting = this.state.type === StateType.Overwriting ? this.state : undefined;
 
@@ -138,12 +138,12 @@ export class DarwinUpdateService extends AbstractUpdateService implements IRelau
 			this.logService.info('update#doCheckForUpdates - checking for update without auto-download because connection is metered');
 		}
 
-		// Kodia: Electron's autoUpdater downloads whatever the feed describes, so it only runs once the feed is newer
+		// BharatCode Studio: Electron's autoUpdater downloads whatever the feed describes, so it only runs once the feed is newer
 		this.checkFeed(url, explicit, baseline, download, overwriting);
 	}
 
 	/**
-	 * Kodia: checks the update feed, then starts Electron's auto-download if `download` and the feed's release is
+	 * BharatCode Studio: checks the update feed, then starts Electron's auto-download if `download` and the feed's release is
 	 * newer than `baseline`, else reports it available for download. Electron's autoUpdater does no such comparison.
 	 */
 	private async checkFeed(url: string, explicit: boolean, baseline: IUpdate, download: boolean, overwriting: Overwriting | undefined): Promise<void> {
@@ -206,7 +206,7 @@ export class DarwinUpdateService extends AbstractUpdateService implements IRelau
 			return;
 		}
 
-		// Kodia: Electron reports the feed's name as the product version and no commit, the feed's update has both
+		// BharatCode Studio: Electron reports the feed's name as the product version and no commit, the feed's update has both
 		update = this.feedUpdate ?? update;
 		this.feedUpdate = undefined;
 
@@ -231,7 +231,7 @@ export class DarwinUpdateService extends AbstractUpdateService implements IRelau
 		// Rebuild feed URL and trigger download via Electron's auto-updater
 		this.buildUpdateFeedUrl(this.quality!, state.update.version, { internalOrg: this.getInternalOrg() });
 		this.setState(State.CheckingForUpdates(true));
-		this.feedUpdate = state.update; // Kodia: see onUpdateDownloaded
+		this.feedUpdate = state.update; // BharatCode Studio: see onUpdateDownloaded
 		electron.autoUpdater.checkForUpdates();
 	}
 

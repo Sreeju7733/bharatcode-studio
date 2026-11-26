@@ -7,27 +7,27 @@ import { CancellationToken } from '../../../../base/common/cancellation.js';
 import { asTextOrError, IRequestService } from '../../../../platform/request/common/request.js';
 
 // A set of guidelines (a CLAUDE.md, an AGENTS.md, ...) added to the AI's instructions while it's on.
-// Kodia keeps the text it downloaded: the instructions don't change until the user updates the framework.
+// BharatCode Studio keeps the text it downloaded: the instructions don't change until the user updates the framework.
 export type InstructionsFramework = {
 	id: string;
 	name: string;
-	sourceURL: string; // where `content` is downloaded from, '' for instructions the user wrote in Kodia
+	sourceURL: string; // where `content` is downloaded from, '' for instructions the user wrote in BharatCode Studio
 	content: string;
 	isOn: boolean;
 }
 
-type BuiltinInstructionsFramework = { id: string, name: string, group: string, description: string, homepage: string, sourceURL: string, adaptForKodia?: (content: string) => string }
+type BuiltinInstructionsFramework = { id: string, name: string, group: string, description: string, homepage: string, sourceURL: string, adaptForBharatCode Studio?: (content: string) => string }
 
-// AIDD's AGENTS.md, keeping only what Kodia can follow:
-// - its "# AGENTS.md" title goes: Kodia sends it as "From AI-Driven Dev", and also sends the project's own AGENTS.md
+// AIDD's AGENTS.md, keeping only what BharatCode Studio can follow:
+// - its "# AGENTS.md" title goes: BharatCode Studio sends it as "From AI-Driven Dev", and also sends the project's own AGENTS.md
 // - its "Memory Management" section goes, with any other line about aidd_docs/ or the aidd_project_memory markers:
-//   AIDD's Claude Code plugins create that folder, and Kodia keeps its own project memory (.kodia/memory.md)
+//   AIDD's Claude Code plugins create that folder, and BharatCode Studio keeps its own project memory (.kodia/memory.md)
 // - its "Agents" section goes: it names agents (explorer, executor, validator, reviewer) that AIDD's plugins add to
-//   Claude Code. Kodia's chat has no sub-agent, and its Agents window has one, which only reads: the window's own
+//   Claude Code. BharatCode Studio's chat has no sub-agent, and its Agents window has one, which only reads: the window's own
 //   instructions say when to hand it a task
-// - so do the rules about Claude Code's tools: Kodia's own instructions say when to batch tool calls (never with XML
-//   tools, one call per response), and Kodia compacts a long thread itself, so there is no compaction to offer
-const forKodiaFromAIDD = (content: string): string => {
+// - so do the rules about Claude Code's tools: BharatCode Studio's own instructions say when to batch tool calls (never with XML
+//   tools, one call per response), and BharatCode Studio compacts a long thread itself, so there is no compaction to offer
+const forBharatCode StudioFromAIDD = (content: string): string => {
 	let lines = content.split('\n')
 	for (const title of ['Memory Management', 'Agents']) {
 		const start = lines.findIndex(line => new RegExp(`^##\\s+${title}\\s*$`).test(line))
@@ -52,7 +52,7 @@ const bookFramework = (id: string, name: string, description: string): BuiltinIn
 	sourceURL: `https://raw.githubusercontent.com/ciembor/agent-rules-books/main/${id}/${id}.mini.md`,
 })
 
-// The frameworks Kodia offers. Their text is downloaded from their repository when the user turns one on.
+// The frameworks BharatCode Studio offers. Their text is downloaded from their repository when the user turns one on.
 export const builtinInstructionsFrameworks: readonly BuiltinInstructionsFramework[] = [
 	{
 		id: 'karpathy',
@@ -66,7 +66,7 @@ export const builtinInstructionsFrameworks: readonly BuiltinInstructionsFramewor
 		id: 'aidd',
 		name: 'AI-Driven Dev',
 		group: 'Agent behavior',
-		description: 'The AGENTS.md of the AI-Driven Dev framework: critical and anti-sycophantic, concise, evidence over assertion, minimal changes. Adapted to Kodia: without its memory section, which needs AIDD\'s plugins (Kodia keeps its own project memory), nor its section about the agents of its plugins, nor its rules about batched tool calls and compaction.',
+		description: 'The AGENTS.md of the AI-Driven Dev framework: critical and anti-sycophantic, concise, evidence over assertion, minimal changes. Adapted to BharatCode Studio: without its memory section, which needs AIDD\'s plugins (BharatCode Studio keeps its own project memory), nor its section about the agents of its plugins, nor its rules about batched tool calls and compaction.',
 		homepage: 'https://github.com/ai-driven-dev/framework',
 		sourceURL: 'https://raw.githubusercontent.com/ai-driven-dev/framework/main/plugins/aidd-context/skills/02-project-memory/assets/templates/AGENTS.md',
 		adaptForKodia: forKodiaFromAIDD,
@@ -98,9 +98,9 @@ export const builtinInstructionsFrameworks: readonly BuiltinInstructionsFramewor
 	bookFramework('release-it', 'Release It!', 'Michael T. Nygard: production readiness, with timeouts, limits, isolation, recovery and diagnosis.'),
 ]
 
-// The text Kodia keeps for a framework: a built-in one may need adapting to Kodia
-export const instructionsFrameworkContentForKodia = (id: string, content: string): string =>
-	builtinInstructionsFrameworks.find(f => f.id === id)?.adaptForKodia?.(content) ?? content
+// The text BharatCode Studio keeps for a framework: a built-in one may need adapting to BharatCode Studio
+export const instructionsFrameworkContentForBharatCode Studio = (id: string, content: string): string =>
+	builtinInstructionsFrameworks.find(f => f.id === id)?.adaptForBharatCode Studio?.(content) ?? content
 
 // sent with every request
 const MAX_FRAMEWORK_LENGTH = 50_000

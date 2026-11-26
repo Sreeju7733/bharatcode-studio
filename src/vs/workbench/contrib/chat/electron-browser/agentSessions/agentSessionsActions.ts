@@ -253,7 +253,7 @@ export class OpenWorkspaceInAgentsWindowTitleBarAction extends Action2 {
 			precondition: OPEN_AGENTS_WINDOW_PRECONDITION,
 			f1: false,
 			menu: {
-				// Kodia: at the far right of the title bar (upstream puts it next to the command center).
+				// BharatCode Studio: at the far right of the title bar (upstream puts it next to the command center).
 				id: MenuId.TitleBar,
 				group: TitleBarTrailingActionsGroup,
 				order: -1000,
@@ -488,8 +488,8 @@ class OpenWorkspaceInAgentsTitleBarWidget extends BaseActionViewItem {
 	override render(container: HTMLElement): void {
 		super.render(container);
 
-		// Kodia: at the far right of the title bar, a label expanding on hover would shift every other
-		// title bar action, so it only expands when an experiment asks for it (Kodia has none).
+		// BharatCode Studio: at the far right of the title bar, a label expanding on hover would shift every other
+		// title bar action, so it only expands when an experiment asks for it (BharatCode Studio has none).
 		container.classList.add('open-in-agents-titlebar-widget');
 		container.setAttribute('role', 'button');
 		this._register(addDisposableListener(container, EventType.MOUSE_ENTER, () => {

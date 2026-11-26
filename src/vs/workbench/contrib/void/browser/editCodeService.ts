@@ -517,7 +517,7 @@ class EditCodeService extends Disposable implements IEditCodeService {
 							offsetLines = 1
 						}
 					}
-					else { throw new Error('Kodia 1') }
+					else { throw new Error('BharatCode Studio 1') }
 
 					const buttonsWidget = this._instantiationService.createInstance(AcceptRejectInlineWidget, {
 						editor,
@@ -671,7 +671,7 @@ class EditCodeService extends Disposable implements IEditCodeService {
 		const elt: IUndoRedoElement = {
 			type: UndoRedoElementType.Resource,
 			resource: uri,
-			label: 'Kodia Agent',
+			label: 'BharatCode Studio Agent',
 			code: 'undoredo.editCode',
 			undo: async () => { opts?.onWillUndo?.(); await this._restoreVoidFileSnapshot(uri, beforeSnapshot) },
 			redo: async () => { if (afterSnapshot) await this._restoreVoidFileSnapshot(uri, afterSnapshot) }
@@ -1294,7 +1294,7 @@ class EditCodeService extends Disposable implements IEditCodeService {
 			startRange = [startLine_, endLine_]
 		}
 		else {
-			throw new Error(`Kodia: diff.type not recognized on: ${from}`)
+			throw new Error(`BharatCode Studio: diff.type not recognized on: ${from}`)
 		}
 
 		const { model } = this._voidModelService.getModel(uri)
@@ -1403,7 +1403,7 @@ class EditCodeService extends Disposable implements IEditCodeService {
 			else if (from === 'ClickApply') {
 				return extractCodeFromRegular({ text: fullText, recentlyAddedTextLen })
 			}
-			throw new Error('Kodia 1')
+			throw new Error('BharatCode Studio 1')
 		}
 
 		// refresh now in case onText takes a while to get 1st message
@@ -1515,7 +1515,7 @@ class EditCodeService extends Disposable implements IEditCodeService {
 		const { model } = this._voidModelService.getModel(uri)
 		if (!model) throw new Error(`Error applying Search/Replace blocks: File does not exist.`)
 
-		// shared with the Kodia agent of the Agents window, which applies the same blocks to a file on disk
+		// shared with the BharatCode Studio agent of the Agents window, which applies the same blocks to a file on disk
 		const newCode = applySearchReplaceBlocks(model.getValue(EndOfLinePreference.LF), blocksStr)
 
 		this._writeURIText(uri, newCode,
@@ -1812,7 +1812,7 @@ class EditCodeService extends Disposable implements IEditCodeService {
 
 						const blocks = extractSearchReplaceBlocks(fullText)
 						if (blocks.length === 0) {
-							this._notificationService.info(`Kodia: We ran Fast Apply, but the LLM didn't output any changes.`)
+							this._notificationService.info(`BharatCode Studio: We ran Fast Apply, but the LLM didn't output any changes.`)
 						}
 						this._writeURIText(uri, originalFileCode, 'wholeFileRange', { shouldRealignDiffAreas: true })
 
@@ -1990,7 +1990,7 @@ class EditCodeService extends Disposable implements IEditCodeService {
 			].join('\n')
 		}
 		else {
-			throw new Error(`Kodia error: ${diff}.type not recognized`)
+			throw new Error(`BharatCode Studio error: ${diff}.type not recognized`)
 		}
 
 		// console.log('DIFF', diff)
@@ -2082,7 +2082,7 @@ class EditCodeService extends Disposable implements IEditCodeService {
 			toRange = { startLineNumber: diff.startLine, startColumn: 1, endLineNumber: diff.endLine, endColumn: Number.MAX_SAFE_INTEGER } // 1-indexed
 		}
 		else {
-			throw new Error(`Kodia error: ${diff}.type not recognized`)
+			throw new Error(`BharatCode Studio error: ${diff}.type not recognized`)
 		}
 
 		// update the file

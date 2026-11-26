@@ -6,10 +6,10 @@
 import type { IKodiaMcpTool } from '../../../../platform/agentHost/common/agentHostByokLm.js';
 import { MCPServerOfName, removeMCPToolNamePrefix } from './mcpServiceTypes.js';
 
-// The MCP servers' tools, as the Kodia agent of the Agents Window sees them
+// The MCP servers' tools, as the BharatCode Studio agent of the Agents Window sees them
 
 // The tools of the servers that are on. A server that is off, loading or in error has none to offer.
-// Kodia has already prefixed each tool's name, so it is unique across servers.
+// BharatCode Studio has already prefixed each tool's name, so it is unique across servers.
 export const mcpToolsOfServers = (servers: MCPServerOfName): IKodiaMcpTool[] => {
 	const ans: IKodiaMcpTool[] = []
 	for (const [serverName, server] of Object.entries(servers)) {
@@ -39,7 +39,7 @@ const isOfType = (type: string, value: unknown): boolean => {
 	}
 }
 
-// Kodia offers every tool parameter to the model as a string, so a number, a boolean or a list reaches the MCP server
+// BharatCode Studio offers every tool parameter to the model as a string, so a number, a boolean or a list reaches the MCP server
 // as text, which servers that check their arguments refuse. A value the tool's schema declares as something else is
 // read back as such; a value that isn't one is left as it is, for the server to refuse.
 export const coerceMcpArguments = (inputSchema: object | undefined, params: Record<string, unknown>): Record<string, unknown> => {

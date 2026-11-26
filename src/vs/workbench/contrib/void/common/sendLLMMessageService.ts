@@ -26,7 +26,7 @@ export interface ILLMMessageService {
 	abort: (requestId: string) => void;
 	ollamaList: (params: ServiceModelListParams<OllamaModelResponse>) => void;
 	openAICompatibleList: (params: ServiceModelListParams<OpenaiCompatibleModelResponse>) => void;
-	// Kodia: a cloud provider's list of models, as its API returns it. Undefined when the provider can't be reached or refuses the key
+	// BharatCode Studio: a cloud provider's list of models, as its API returns it. Undefined when the provider can't be reached or refuses the key
 	listProviderModels: (providerName: ListableProviderName, apiKey: string) => Promise<unknown[] | undefined>;
 }
 
@@ -119,7 +119,7 @@ export class LLMMessageService extends Disposable implements ILLMMessageService 
 
 		// throw an error if no model/provider selected (this should usually never be reached, the UI should check this first, but might happen in cases like Apply where we haven't built much UI/checks yet, good practice to have check logic on backend)
 		if (modelSelection === null) {
-			const message = `Please add a provider in Kodia's Settings.`
+			const message = `Please add a provider in BharatCode Studio's Settings.`
 			onError({ message, fullError: null })
 			return null
 		}

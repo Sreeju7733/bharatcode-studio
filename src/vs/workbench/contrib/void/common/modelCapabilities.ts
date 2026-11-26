@@ -78,7 +78,7 @@ export const defaultProviderSettings = {
 
 
 
-// the models whose capabilities Kodia's catalog has (below); the tests and the weekly model check go through them all
+// the models whose capabilities BharatCode Studio's catalog has (below); the tests and the weekly model check go through them all
 export const catalogModelsOfProvider = {
 	bharatcode: [
 		'glm-5.3-flash',
@@ -171,7 +171,7 @@ export const catalogModelsOfProvider = {
 
 } as const satisfies Record<ProviderName, string[]>
 
-// Kodia: the one model a provider's section has before its list of models is read, its most recent. The others come
+// BharatCode Studio: the one model a provider's section has before its list of models is read, its most recent. The others come
 // from the provider's API (providerModels.ts), switched off, with their capabilities from the catalog
 export const defaultModelsOfProvider = {
 	bharatcode: ['glm-5.3-flash'],
@@ -197,7 +197,7 @@ export const defaultModelsOfProvider = {
 
 
 export type VoidStaticModelInfo = { // not stateful
-	// Kodia uses the information below to know how to handle each model.
+	// BharatCode Studio uses the information below to know how to handle each model.
 	// for some examples, see openAIModelOptions and anthropicModelOptions (below).
 
 	contextWindow: number; // input tokens
@@ -266,7 +266,7 @@ export type ModelOverrides = Pick<
 
 /**
  * A model's overrides as they are stored. `specialToolFormat: null` means "no native tool calling": the model is
- * taught the XML format instead. (JSON has no `undefined`, and a missing key means "keep Kodia's default".)
+ * taught the XML format instead. (JSON has no `undefined`, and a missing key means "keep BharatCode Studio's default".)
  */
 export type StoredModelOverrides = Partial<Omit<ModelOverrides, 'specialToolFormat'>> & { specialToolFormat?: ModelOverrides['specialToolFormat'] | null }
 
@@ -500,7 +500,7 @@ const extensiveModelOptionsFallback: VoidStaticProviderInfo['modelOptionsFallbac
 		if (lower.includes('pro')) return toFallback(geminiModelOptions, 'gemini-3.1-pro-preview')
 		return toFallback(geminiModelOptions, 'gemini-3.8-flash')
 	}
-	// Gemini 1 and 2, which Kodia no longer offers: their replacements
+	// Gemini 1 and 2, which BharatCode Studio no longer offers: their replacements
 	if (lower.includes('gemini') && (lower.includes('2.5') || lower.includes('2-5') || lower.includes('2.0') || lower.includes('1.5'))) {
 		if (lower.includes('flash-lite') || lower.includes('flash_lite')) return toFallback(geminiModelOptions, 'gemini-3.5-flash-lite')
 		if (lower.includes('flash')) return toFallback(geminiModelOptions, 'gemini-3.6-flash')
@@ -1317,7 +1317,7 @@ const geminiSettings: VoidStaticProviderInfo = {
 	modelOptionsFallback: (modelName) => {
 		const lower = modelName.toLowerCase()
 		let fallbackName: keyof typeof geminiModelOptions | null = null
-		// the models Kodia no longer offers go to Google's replacement: 3.7 and 3.5 Flash, whose requests Google serves
+		// the models BharatCode Studio no longer offers go to Google's replacement: 3.7 and 3.5 Flash, whose requests Google serves
 		// with 3.8 and 3.6 Flash; 3.1 Flash-Lite, deprecated; Gemini 1 and 2
 		if (lower.includes('3.8') || lower.includes('3.7')) fallbackName = 'gemini-3.8-flash'
 		else if (lower.includes('3.6')) fallbackName = 'gemini-3.6-flash'
@@ -1453,7 +1453,7 @@ const mistralReasoningEffortCapabilities = {
 	openSourceThinkTags: ['<think>', '</think>'] as [string, string],
 }
 
-// Large 4 takes the same 'none' / 'high' reasoning_effort, but Kodia defaults it to 'high': without the
+// Large 4 takes the same 'none' / 'high' reasoning_effort, but BharatCode Studio defaults it to 'high': without the
 // param it doesn't think at all, and Mistral recommends 'high' for code and agentic work.
 // https://docs.mistral.ai/capabilities/reasoning
 const mistralLarge4ReasoningEffortCapabilities = {
@@ -2082,7 +2082,7 @@ const modelSettingsOfProvider: { [providerName in ProviderName]: VoidStaticProvi
 
 // ---------------- exports ----------------
 
-// Kodia: the models detected through a provider's API (OpenRouter's free models, the models missing from the catalog),
+// BharatCode Studio: the models detected through a provider's API (OpenRouter's free models, the models missing from the catalog),
 // with the capabilities the API gave. They're saved with the provider's models in the settings, which every request
 // carries to the main process: the settings service sets them here in the renderer, and sendLLMMessage in the main process.
 let detectedModelOptions: { [providerName in ProviderName]?: { [modelName: string]: Partial<VoidStaticModelInfo> } } = {};
@@ -2126,7 +2126,7 @@ export const getModelCapabilities = (
 	const detected = detectedModelOptions[providerName]?.[modelName];
 	if (detected) {
 		const known = modelOptionsFallback(modelName);
-		// a local server only says a model's context window: a name Kodia doesn't know is still a model it doesn't know
+		// a local server only says a model's context window: a name BharatCode Studio doesn't know is still a model it doesn't know
 		if (!known && Object.keys(detected).every(key => key === 'contextWindow')) {
 			return { ...defaultModelOptions, supportsVision: looksLikeVisionModel(lowercaseModelName), ...detected, ...overrides, modelName, isUnrecognizedModel: true };
 		}

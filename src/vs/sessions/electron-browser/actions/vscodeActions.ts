@@ -107,7 +107,7 @@ export class OpenVSCodeWindowAction extends Action2 {
 	constructor() {
 		super({
 			id: OpenVSCodeWindowAction.ID,
-			// Kodia: a title bar button at the far right, where the IDE has its button to open the Agents window.
+			// BharatCode Studio: a title bar button at the far right, where the IDE has its button to open the Agents window.
 			title: localize2('switchToIDE', 'Switch to IDE'),
 			icon: Codicon.code,
 			f1: true,
@@ -137,7 +137,7 @@ export class OpenVSCodeWindowAction extends Action2 {
 }
 
 /**
- * Kodia: focuses an editor window, preferring the one showing the active session's folder, and returns its id. When
+ * BharatCode Studio: focuses an editor window, preferring the one showing the active session's folder, and returns its id. When
  * no editor window is open, opens one on the active session's folders (or an empty one when the session has none),
  * and returns the id of that new window.
  */
@@ -169,12 +169,12 @@ export async function switchToIDE(
 const MANAGE_MODELS_COMMAND_ID = 'workbench.action.chat.manage';
 
 /**
- * Kodia: opens Kodia's settings, where its models are set up, in the editor window Switch to IDE goes to.
- * The Agents Window doesn't load Kodia's contribution, so its settings only exist in editor windows.
+ * BharatCode Studio: opens BharatCode Studio's settings, where its models are set up, in the editor window Switch to IDE goes to.
+ * The Agents Window doesn't load BharatCode Studio's contribution, so its settings only exist in editor windows.
  */
-export async function openKodiaSettingsInIDE(
+export async function openBharatCode StudioSettingsInIDE(
 	nativeHostService: INativeHostService,
-	kodiaWindowsService: IKodiaWindowsService,
+	kodiaWindowsService: IBharatCode StudioWindowsService,
 	currentWindowId: number,
 	session: IActiveSession | undefined,
 	sessionsProvidersService: ISessionsProvidersService,
@@ -187,8 +187,8 @@ export async function openKodiaSettingsInIDE(
 }
 
 /**
- * Kodia: "Manage Models..." in the Agents Window's model picker opens Kodia's settings instead of VS Code's language
- * models screen, which never lists Kodia's providers. The chat's own action registers the command once the workbench
+ * BharatCode Studio: "Manage Models..." in the Agents Window's model picker opens BharatCode Studio's settings instead of VS Code's language
+ * models screen, which never lists BharatCode Studio's providers. The chat's own action registers the command once the workbench
  * has restored; this handler is registered right after it, so it takes precedence (the latest registration wins).
  * Registering it first would make the chat's action throw, and its other model actions would go missing.
  */

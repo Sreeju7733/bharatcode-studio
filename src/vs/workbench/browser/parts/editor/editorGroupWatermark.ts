@@ -31,7 +31,7 @@ import { IViewsService } from '../../../services/views/common/viewsService.js';
 
 import { KODIA_OPEN_SETTINGS_COMMAND_ID } from '../../../../platform/windows/common/kodiaWindows.js';
 
-/* eslint-disable */ // Kodia
+/* eslint-disable */ // BharatCode Studio
 import { VOID_CTRL_K_ACTION_ID, VOID_CTRL_L_ACTION_ID } from '../../../contrib/void/browser/actionIDs.js';
 import { VIEWLET_ID as REMOTE_EXPLORER_VIEWLET_ID } from '../../../contrib/remote/browser/remoteExplorer.js';
 import { IVoidSettingsService } from '../../../contrib/void/common/voidSettingsService.js';
@@ -90,14 +90,14 @@ import { isFeatureNameDisabled } from '../../../contrib/void/common/voidSettings
 // ];
 
 
-// Kodia: a recent folder on the welcome screen, with its branch when it is a git worktree
+// BharatCode Studio: a recent folder on the welcome screen, with its branch when it is a git worktree
 interface IWelcomeRecentFolder {
 	readonly folder: IRecentFolder;
 	readonly worktree: { readonly branch: string | undefined } | undefined;
 }
 
 export class EditorGroupWatermark extends Disposable {
-	private readonly watermark: HTMLElement; // Kodia: gets .kodia-welcome in an empty window
+	private readonly watermark: HTMLElement; // BharatCode Studio: gets .kodia-welcome in an empty window
 	private readonly shortcuts: HTMLElement;
 	private readonly transientDisposables = this._register(new DisposableStore());
 	// private enabled: boolean = false;
@@ -116,12 +116,12 @@ export class EditorGroupWatermark extends Disposable {
 		@IHostService private readonly hostService: IHostService,
 		@ILabelService private readonly labelService: ILabelService,
 		@IViewsService private readonly viewsService: IViewsService,
-		@IFileService private readonly fileService: IFileService, // Kodia: tells git worktrees apart in the recent folders
-		@IVoidSettingsService private readonly voidSettingsService: IVoidSettingsService, // Kodia: whether a Chat model is set up
+		@IFileService private readonly fileService: IFileService, // BharatCode Studio: tells git worktrees apart in the recent folders
+		@IVoidSettingsService private readonly voidSettingsService: IVoidSettingsService, // BharatCode Studio: whether a Chat model is set up
 	) {
 		super();
 
-		// Kodia: VS Code 1.141 wraps the watermark in .editor-group-watermark-wrapper, and every watermark rule in
+		// BharatCode Studio: VS Code 1.141 wraps the watermark in .editor-group-watermark-wrapper, and every watermark rule in
 		// editorgroupview.css (centering, logo size, hiding it once an editor opens) now targets that wrapper.
 		const elements = h('.editor-group-watermark-wrapper', [
 			h('.editor-group-watermark@watermark', [
@@ -169,7 +169,7 @@ export class EditorGroupWatermark extends Disposable {
 			this.render();
 		}));
 
-		// Kodia: the welcome screen says whether a Chat model is set up; other settings changes don't concern it
+		// BharatCode Studio: the welcome screen says whether a Chat model is set up; other settings changes don't concern it
 		let hasChatModel = this.hasChatModel();
 		this._register(this.voidSettingsService.onDidChangeState(() => {
 			if (this.hasChatModel() === hasChatModel) {
@@ -202,10 +202,10 @@ export class EditorGroupWatermark extends Disposable {
 			const recentlyOpened = await this.workspacesService.getRecentlyOpened()
 				.catch(() => ({ files: [], workspaces: [] })).then(w => w.workspaces);
 
-			// Kodia - if the workbench is empty, show the welcome screen (its recent folders are resolved before clearing, like the list above)
+			// BharatCode Studio - if the workbench is empty, show the welcome screen (its recent folders are resolved before clearing, like the list above)
 			const isEmptyWorkbench = this.contextService.getWorkbenchState() === WorkbenchState.EMPTY;
 			const recentFolders = isEmptyWorkbench ? await this.resolveRecentFolders(recentlyOpened) : [];
-			await this.voidSettingsService.waitForInitState; // Kodia: the saved models, not the defaults, before saying none is set up
+			await this.voidSettingsService.waitForInitState; // BharatCode Studio: the saved models, not the defaults, before saying none is set up
 
 			clearNode(voidIconBox);
 
@@ -218,12 +218,12 @@ export class EditorGroupWatermark extends Disposable {
 			}
 			else {
 
-				// show them Kodia keybindings
+				// show them BharatCode Studio keybindings
 				this.renderShortcuts(voidIconBox);
 
 				// const keys3 = this.keybindingService.lookupKeybinding('workbench.action.openGlobalKeybindings');
 				// const button3 = append(recentsBox, $('button'));
-				// button3.textContent = `Kodia Settings`
+				// button3.textContent = `BharatCode Studio Settings`
 				// button3.style.display = 'block'
 				// button3.style.marginLeft = 'auto'
 				// button3.style.marginRight = 'auto'
@@ -245,7 +245,7 @@ export class EditorGroupWatermark extends Disposable {
 		this.transientDisposables.add(this.keybindingService.onDidUpdateKeybindings(update));
 	}
 
-	// Kodia: the Chat and Quick Edit keybindings
+	// BharatCode Studio: the Chat and Quick Edit keybindings
 	private renderShortcuts(container: HTMLElement): void {
 		for (const [name, actionId] of [['Chat', VOID_CTRL_L_ACTION_ID], ['Quick Edit', VOID_CTRL_K_ACTION_ID]]) {
 			const dl = append(container, $('dl'));
@@ -259,12 +259,12 @@ export class EditorGroupWatermark extends Disposable {
 		}
 	}
 
-	// Kodia: whether the chat has a model to use (a provider set up and a model selected)
+	// BharatCode Studio: whether the chat has a model to use (a provider set up and a model selected)
 	private hasChatModel(): boolean {
 		return !isFeatureNameDisabled('Chat', this.voidSettingsService.state);
 	}
 
-	// Kodia: the empty window's welcome screen (Open Folder, Open SSH, then the most recent folders)
+	// BharatCode Studio: the empty window's welcome screen (Open Folder, Open SSH, then the most recent folders)
 	private renderWelcome(container: HTMLElement, recentFolders: IWelcomeRecentFolder[]): void {
 		const actions = append(container, $('.kodia-welcome-actions'));
 
@@ -278,7 +278,7 @@ export class EditorGroupWatermark extends Disposable {
 		this.currentDisposables.add(openSSHButton);
 		this.currentDisposables.add(openSSHButton.onDidClick(() => this.viewsService.openViewContainer(REMOTE_EXPLORER_VIEWLET_ID)));
 
-		// what Kodia's AI needs: a model to set up, or the shortcuts to use it once one is
+		// what BharatCode Studio's AI needs: a model to set up, or the shortcuts to use it once one is
 		const ai = append(container, $('.kodia-welcome-ai'));
 		if (this.hasChatModel()) {
 			this.renderShortcuts(ai);
@@ -333,13 +333,13 @@ export class EditorGroupWatermark extends Disposable {
 		}
 	}
 
-	// Kodia: the 5 most recent folders, each with its branch when it is a git worktree
+	// BharatCode Studio: the 5 most recent folders, each with its branch when it is a git worktree
 	private resolveRecentFolders(recents: readonly IRecent[]): Promise<IWelcomeRecentFolder[]> {
 		const folders = recents.filter(isRecentFolder).slice(0, 5);
 		return Promise.all(folders.map(async folder => ({ folder, worktree: await this.resolveWorktree(folder) })));
 	}
 
-	// Kodia: a git worktree has a `.git` file pointing into the main repository's `.git/worktrees/` (a submodule's points
+	// BharatCode Studio: a git worktree has a `.git` file pointing into the main repository's `.git/worktrees/` (a submodule's points
 	// into `.git/modules/`), and its branch is in that folder's HEAD. Anything unreadable (gone, remote...) is a plain folder.
 	private async resolveWorktree(folder: IRecentFolder): Promise<{ readonly branch: string | undefined } | undefined> {
 		try {

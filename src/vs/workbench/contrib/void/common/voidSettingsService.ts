@@ -70,15 +70,15 @@ export interface IVoidSettingsService {
 	// setMCPServerStates: (newStates: MCPServerStates) => Promise<void>;
 
 	// setting to undefined CLEARS it, unlike others:
-	/** Replaces the model's overrides: a setting left out goes back to Kodia's default. `undefined` removes them all. */
+	/** Replaces the model's overrides: a setting left out goes back to BharatCode Studio's default. `undefined` removes them all. */
 	setOverridesOfModel(providerName: ProviderName, modelName: string, overrides: StoredModelOverrides | undefined): Promise<void>;
 
 	dangerousSetState(newState: VoidSettingsState): Promise<void>;
 	resetState(): Promise<void>;
 
-	// Kodia: `capabilitiesOfModel` is what the server says of a model (its context window), by model name
+	// BharatCode Studio: `capabilitiesOfModel` is what the server says of a model (its context window), by model name
 	setAutodetectedModels(providerName: ProviderName, modelNames: string[], logging: object, capabilitiesOfModel?: Record<string, Partial<VoidStaticModelInfo> | undefined>): void;
-	// Kodia: the models a provider's API lists besides its default one (on OpenRouter, its free and most used models),
+	// BharatCode Studio: the models a provider's API lists besides its default one (on OpenRouter, its free and most used models),
 	// with their capabilities. New ones are switched off, but for `shownModelNames` (the most used, OpenRouter's free ones)
 	setDetectedModels(providerName: ProviderName, models: DetectedModel[], shownModelNames?: readonly string[]): void;
 	toggleModelHidden(providerName: ProviderName, modelName: string): void;
@@ -140,7 +140,7 @@ const _stateWithMergedDefaultModels = (state: VoidSettingsState): VoidSettingsSt
 	for (const providerName of providerNames) {
 		const defaultModels = defaultSettingsOfProvider[providerName]?.models ?? []
 		const defaultModelNames = defaultModels.map(m => m.modelName)
-		// Kodia: a model that is no longer a default stays when the user had switched it on, as a model of their own
+		// BharatCode Studio: a model that is no longer a default stays when the user had switched it on, as a model of their own
 		// (the provider's list of models brings it back as a detected one, see providerModelsContrib.ts)
 		const currentModels = (newSettingsOfProvider[providerName]?.models ?? []).map(m =>
 			m.type === 'default' && !m.isHidden && !defaultModelNames.includes(m.modelName) ? { ...m, type: 'custom' as const } : m)
@@ -349,7 +349,7 @@ class VoidSettingsService extends Disposable implements IVoidSettingsService {
 			}
 
 			if (!Array.isArray(readS.globalSettings.instructionsFrameworks)) readS.globalSettings.instructionsFrameworks = []
-			// frameworks downloaded before Kodia adapted them, such as AIDD
+			// frameworks downloaded before BharatCode Studio adapted them, such as AIDD
 			readS.globalSettings.instructionsFrameworks = readS.globalSettings.instructionsFrameworks.map(f =>
 				typeof f?.content === 'string' ? { ...f, content: instructionsFrameworkContentForKodia(f.id, f.content) } : f)
 		}

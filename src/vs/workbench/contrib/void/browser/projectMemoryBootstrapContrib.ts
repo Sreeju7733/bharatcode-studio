@@ -58,7 +58,7 @@ class ProjectMemoryBootstrapContribution extends Disposable implements IWorkbenc
 
 		this.notificationService.prompt(
 			Severity.Info,
-			`Kodia's agent can explore this project and write notes for future sessions in ${PROJECT_MEMORY_FILE_PATH}. It reads part of the codebase, which uses tokens.`,
+			`BharatCode Studio's agent can explore this project and write notes for future sessions in ${PROJECT_MEMORY_FILE_PATH}. It reads part of the codebase, which uses tokens.`,
 			[
 				{ label: 'Explore the project', run: () => this._bootstrap() },
 				{ label: 'Not now', run: () => { } },

@@ -204,8 +204,8 @@ registerSingleton(IExtensionTransferService, ExtensionTransferService, Instantia
 
 
 
-// The names of Kodia's own folders. Shipped builds set them in prepare_vscode.sh in kodia-builder: the insiders build
-// has 'Kodia - Insiders' and '.kodia-insiders'.
+// The names of BharatCode Studio's own folders. Shipped builds set them in prepare_vscode.sh in kodia-builder: the insiders build
+// has 'BharatCode Studio - Insiders' and '.kodia-insiders'.
 export type TransferProductNames = Pick<IProductService, 'nameShort' | 'dataFolderName'>;
 
 // The targets follow the default locations the app reads from: getUserDataPath in platform/environment/node/userDataPath.ts

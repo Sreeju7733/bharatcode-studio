@@ -16,8 +16,8 @@ import './common/agentsSizes.js';
 
 //#endregion
 
-//#region --- Kodia
-import './contrib/void/browser/void.contribution.js'; // Kodia added this
+//#region --- BharatCode Studio
+import './contrib/void/browser/void.contribution.js'; // BharatCode Studio added this
 //#endregion
 
 //#region --- workbench actions
@@ -225,7 +225,7 @@ import './contrib/notebook/browser/notebook.contribution.js';
 // Speech
 import './contrib/speech/browser/speech.contribution.js';
 
-// Chat — Kodia keeps shared services for compatibility; Microsoft chat UI is disabled when using Kodia chat.
+// Chat — BharatCode Studio keeps shared services for compatibility; Microsoft chat UI is disabled when using BharatCode Studio chat.
 // (The Agents Window registers its own agent host contributions from sessions.desktop.main.ts.)
 import './contrib/chat/browser/chat.shared.contribution.js';
 // import './contrib/chat/browser/chat.contribution.js';
@@ -234,7 +234,7 @@ import './contrib/chat/browser/chat.shared.contribution.js';
 // import './contrib/chat/browser/chat.view.contribution.js';
 // import './contrib/inlineChat/browser/inlineChat.contribution.js';
 
-// Copilot Voice — off in Kodia
+// Copilot Voice — off in BharatCode Studio
 // import './contrib/agentsVoice/browser/agentsVoice.contribution.js';
 import './contrib/mcp/browser/mcp.contribution.js';
 import './contrib/mcp/browser/mcp.view.contribution.js';
@@ -391,7 +391,7 @@ import './contrib/surveys/browser/nps.contribution.js';
 import './contrib/surveys/browser/languageSurveys.contribution.js';
 
 // Welcome
-// Kodia commented this out
+// BharatCode Studio commented this out
 // import './contrib/welcomeGettingStarted/browser/gettingStarted.contribution.js';
 import './contrib/welcomeGettingStarted/browser/gettingStarted.contribution.js';
 // import './contrib/welcomeAgentSessions/browser/agentSessionsWelcome.contribution.js';
@@ -400,8 +400,8 @@ import './contrib/welcomeViews/common/viewsWelcome.contribution.js';
 import './contrib/welcomeViews/common/newFile.contribution.js';
 
 // Welcome Onboarding — registers the onboarding service the startup page depends on since 1.141.
-// The Microsoft Copilot onboarding itself never shows in Kodia (guard in onboardingVariationA.ts;
-// Kodia uses voidOnboardingService).
+// The Microsoft Copilot onboarding itself never shows in BharatCode Studio (guard in onboardingVariationA.ts;
+// BharatCode Studio uses voidOnboardingService).
 import './contrib/welcomeOnboarding/browser/welcomeOnboarding.contribution.js';
 
 // Onboarding (scenario engine)

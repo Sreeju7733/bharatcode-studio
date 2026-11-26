@@ -64,7 +64,7 @@ export class Win32UpdateService extends AbstractUpdateService implements IRelaun
 	private readonly setupMutexName: string;
 
 	private get cachePathSync(): string {
-		// Kodia: not vscode-…, which VS Code itself uses and empties of other versions' setups
+		// BharatCode Studio: not vscode-…, which VS Code itself uses and empties of other versions' setups
 		return path.join(tmpdir(), `${this.productService.applicationName}-${this.productService.quality}-${this.productService.target}-${process.arch}`);
 	}
 
@@ -227,7 +227,7 @@ export class Win32UpdateService extends AbstractUpdateService implements IRelaun
 		const internalOrg = this.getInternalOrg();
 		const background = !explicit && !internalOrg;
 		const url = this.buildUpdateFeedUrl(this.quality, pendingCommit ?? this.productService.commit!, { background, internalOrg });
-		const baseline = this.getBaselineUpdate(pendingCommit); // Kodia: see isNewerUpdate below
+		const baseline = this.getBaselineUpdate(pendingCommit); // BharatCode Studio: see isNewerUpdate below
 
 		// Only set CheckingForUpdates if we're not already in Overwriting state
 		if (this.state.type !== StateType.Overwriting) {
@@ -249,7 +249,7 @@ export class Win32UpdateService extends AbstractUpdateService implements IRelaun
 					return Promise.resolve(null);
 				}
 
-				// Kodia: the feed always describes the latest release, see kodiaUpdate.ts
+				// BharatCode Studio: the feed always describes the latest release, see kodiaUpdate.ts
 				if (!isNewerUpdate(update, baseline)) {
 					// If we were checking for an overwrite update and found nothing newer,
 					// restore the Ready state with the pending update
@@ -372,7 +372,7 @@ export class Win32UpdateService extends AbstractUpdateService implements IRelaun
 	}
 
 	protected override async doDownloadUpdate(state: AvailableForDownload): Promise<void> {
-		// Kodia: the releases page like on Linux, MSI installs also read the archive feed and its url is the zip
+		// BharatCode Studio: the releases page like on Linux, MSI installs also read the archive feed and its url is the zip
 		if (this.productService.downloadUrl) {
 			this.nativeHostMainService.openExternal(undefined, this.productService.downloadUrl);
 		} else if (state.update.url) {

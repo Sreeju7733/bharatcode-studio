@@ -36,7 +36,7 @@ const portable = configurePortable(product);
 
 const args = parseCLIArgs();
 
-// Kodia: carry over the data folders named after Void (see legacyDataFolders.ts), before argv.json is read from the new one
+// BharatCode Studio: carry over the data folders named after Void (see legacyDataFolders.ts), before argv.json is read from the new one
 if (!portable.isPortable && !process.env['VSCODE_DEV']) {
 	copyLegacyDataFolders(fs, os.homedir(), [
 		{ from: '.void-editor', to: product.dataFolderName ?? '' },

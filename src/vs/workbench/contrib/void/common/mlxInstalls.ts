@@ -4,8 +4,8 @@
  *--------------------------------------------------------------------------------------*/
 
 // A Mac can have several mlx-lm installs, and a new model needs a recent one: Qwen3.5 models ("Model type qwen3_5 not
-// supported") need 0.30 or later. Kodia starts mlx_lm.server itself, and an app opened from the Dock has a short PATH,
-// where `python3` is the one Xcode brings (Python 3.9 and an mlx-lm of last year). Kodia looks for the installs and
+// supported") need 0.30 or later. BharatCode Studio starts mlx_lm.server itself, and an app opened from the Dock has a short PATH,
+// where `python3` is the one Xcode brings (Python 3.9 and an mlx-lm of last year). BharatCode Studio looks for the installs and
 // starts the newest.
 
 /** An install of mlx-lm: the Python it runs on, and its version. */
@@ -94,7 +94,7 @@ export function wellKnownPythons(home: string, frameworkVersions: readonly strin
 export function mlxErrorWithHint(message: string): string {
 	const unsupported = /Model type (\S+?) not supported/.exec(message);
 	return unsupported
-		? `${message}\nThe mlx-lm that serves this model is too old for the "${unsupported[1]}" architecture. Update it with: python3 -m pip install --upgrade mlx-lm, then stop the running mlx_lm.server so that Kodia starts the new one.`
+		? `${message}\nThe mlx-lm that serves this model is too old for the "${unsupported[1]}" architecture. Update it with: python3 -m pip install --upgrade mlx-lm, then stop the running mlx_lm.server so that BharatCode Studio starts the new one.`
 		: message;
 }
 

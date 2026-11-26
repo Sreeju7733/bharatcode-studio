@@ -11,7 +11,7 @@ import { MAX_PROJECT_MEMORY_TOKENS, memoryTooLongMessage, memoryWithSection, PRO
 import { PROJECT_MEMORY_STORAGE_KEY } from './storageKeys.js';
 import { estimateTokens } from './tokenizer.js';
 
-// the file format is shared with the Kodia agent of the Agents window
+// the file format is shared with the BharatCode Studio agent of the Agents window
 export { memoryWithSection, parseMemorySections, PROJECT_MEMORY_FILE_PATH } from '../../../../platform/kodia/common/projectMemory.js';
 
 

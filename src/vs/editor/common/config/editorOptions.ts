@@ -3811,7 +3811,7 @@ class EditorQuickSuggestions extends BaseEditorOption<EditorOption.quickSuggesti
 		const defaults: InternalQuickSuggestionsOptions = {
 			other: 'offWhenInlineCompletions',
 			comments: 'off',
-			strings: 'on' // Kodia changed this setting
+			strings: 'on' // BharatCode Studio changed this setting
 		};
 		const types: IJSONSchema[] = [
 			{ type: 'boolean' },

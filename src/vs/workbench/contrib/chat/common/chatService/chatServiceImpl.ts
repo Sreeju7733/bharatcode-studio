@@ -1423,8 +1423,8 @@ export class ChatService extends Disposable implements IChatService {
 
 		const location = options?.location ?? model.initialLocation;
 		const attempt = options?.attempt ?? 0;
-		// Kodia: a request addressed to a session's own agent (the Agents window) doesn't need a default
-		// agent, which Kodia lacks because it ships without the Copilot extension.
+		// BharatCode Studio: a request addressed to a session's own agent (the Agents window) doesn't need a default
+		// agent, which BharatCode Studio lacks because it ships without the Copilot extension.
 		const silentAgent = options?.agentIdSilent ? this.chatAgentService.getAgent(options.agentIdSilent) : undefined;
 		const defaultAgent = silentAgent ?? this.chatAgentService.getDefaultAgent(location, options?.modeInfo?.kind);
 		if (!defaultAgent) {
@@ -2175,8 +2175,8 @@ export class ChatService extends Disposable implements IChatService {
 		};
 
 		const location = sendOptions.location ?? sendOptions.locationData?.type ?? model.initialLocation;
-		// Kodia: a request addressed to a session's own agent (the Agents window) doesn't need a default
-		// agent, which Kodia lacks because it ships without the Copilot extension.
+		// BharatCode Studio: a request addressed to a session's own agent (the Agents window) doesn't need a default
+		// agent, which BharatCode Studio lacks because it ships without the Copilot extension.
 		const silentAgent = sendOptions.agentIdSilent ? this.chatAgentService.getAgent(sendOptions.agentIdSilent) : undefined;
 		const defaultAgent = silentAgent ?? this.chatAgentService.getDefaultAgent(location, sendOptions.modeInfo?.kind);
 		if (!defaultAgent) {

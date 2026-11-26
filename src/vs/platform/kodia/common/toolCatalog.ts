@@ -5,7 +5,7 @@
 
 import { replaceTool_description } from './searchReplaceBlocks.js';
 
-// The tools Kodia's chat and the Kodia agent of the Agents window both have, defined once: the name, the description
+// The tools BharatCode Studio's chat and the Kodia agent of the Agents window both have, defined once: the name, the description
 // and the parameters a model is told, with the types and required parameters the agent's schema declares and the kind
 // of approval a call needs. How each side runs them is its own: the chat edits through the editor, with a diff to
 // review, the agent writes to disk. `sharedTools` are the ones the agent runs itself. `editorTools`, below, need an
@@ -15,12 +15,12 @@ import { replaceTool_description } from './searchReplaceBlocks.js';
 
 export type SharedToolParam = {
 	description: string,
-	/** Default: a string. Kodia's chat is told every parameter as a string, see toolSchema.ts. */
+	/** Default: a string. BharatCode Studio's chat is told every parameter as a string, see toolSchema.ts. */
 	type?: 'integer' | 'boolean',
 	required?: true,
 }
 
-/** The kinds of approval of Kodia's settings (`autoApprove`) that these tools need. */
+/** The kinds of approval of BharatCode Studio's settings (`autoApprove`) that these tools need. */
 export type SharedToolApproval = 'edits' | 'terminal' | 'web pages'
 
 export type SharedTool = {
@@ -211,7 +211,7 @@ const symbolParams = {
 } as const satisfies { [paramName: string]: SharedToolParam }
 
 /**
- * The tools of Kodia's chat that need an editor window: its language servers and its diagnostics. All read-only, so a
+ * The tools of BharatCode Studio's chat that need an editor window: its language servers and its diagnostics. All read-only, so a
  * call needs no approval. The chat runs them in its own window; the agent of the Agents window asks an editor window.
  */
 export const editorTools = {

@@ -11,7 +11,7 @@ import { ProviderName } from './voidSettingsTypes.js';
 // https://openrouter.ai/docs/api/api-reference/models/get-models
 export const OPENROUTER_MODELS_BY_USAGE_URL = 'https://openrouter.ai/api/v1/models?sort=top-weekly';
 
-// the fields Kodia reads
+// the fields BharatCode Studio reads
 export type OpenRouterModel = {
 	id: string;
 	context_length: number;
@@ -38,7 +38,7 @@ const isFree = (model: OpenRouterModel) => {
 	return prices.length > 0 && prices.every(price => price === undefined || Number(price) === 0);
 };
 
-// OpenRouter's prices are per token, Kodia's per million tokens
+// OpenRouter's prices are per token, BharatCode Studio's per million tokens
 const perMillion = (price: string | undefined) => price === undefined || Number.isNaN(Number(price)) ? undefined : Number(price) * 1_000_000;
 
 const capabilitiesOf = (model: OpenRouterModel): VoidStaticModelInfo => {
@@ -65,11 +65,11 @@ const capabilitiesOf = (model: OpenRouterModel): VoidStaticModelInfo => {
 	};
 };
 
-// free models Kodia can't use, which OpenRouter's list doesn't tell: Inkling's is only for the apps OpenRouter lists as
+// free models BharatCode Studio can't use, which OpenRouter's list doesn't tell: Inkling's is only for the apps OpenRouter lists as
 // agentic harnesses (a 403), Gemma's only provider, Google AI Studio, rate-limits it (a 429). Their paid versions work.
 const unusableFreeModel = /^thinkingmachines\/|^google\/gemma-/;
 
-// a model that can run Kodia's agent: chat (text out, with or without images in), not a voice model, tool calling,
+// a model that can run BharatCode Studio's agent: chat (text out, with or without images in), not a voice model, tool calling,
 // room for the agent's context and for a file in the output, and not retired within a week
 const canRunAgent = (model: OpenRouterModel, now: number) => {
 	if (model.id.startsWith('openrouter/')) return false; // OpenRouter's routers: what they can do depends on the model they pick
@@ -94,7 +94,7 @@ export const freeCodingModelsOfOpenRouter = (models: OpenRouterModel[], now: num
 	return picked.map(model => ({ modelName: model.id, capabilities: capabilitiesOf(model) }));
 };
 
-// The models OpenRouter's users used most last week that can run the agent, besides the free ones and Kodia's default
+// The models OpenRouter's users used most last week that can run the agent, besides the free ones and BharatCode Studio's default
 // OpenRouter model. `modelsByUsage` is OpenRouter's list sorted by usage (OPENROUTER_MODELS_BY_USAGE_URL). A snapshot
 // counts for its model when OpenRouter lists that too (deepseek-v4.1-flash-1017 is deepseek-v4.1-flash).
 export const mostUsedModelsOfOpenRouter = (modelsByUsage: OpenRouterModel[], now: number, count: number): DetectedOpenRouterModel[] => {

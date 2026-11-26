@@ -170,10 +170,10 @@ const newOpenAICompatibleSDK = async ({ settingsOfProvider, providerName }: { se
 		return new OpenAI({
 			baseURL: 'https://openrouter.ai/api/v1',
 			apiKey: thisConfig.apiKey,
-			// Kodia's app on OpenRouter (rankings, marketplace), in its coding categories — https://openrouter.ai/docs/app-attribution
+			// BharatCode Studio's app on OpenRouter (rankings, marketplace), in its coding categories — https://openrouter.ai/docs/app-attribution
 			defaultHeaders: {
 				'HTTP-Referer': KODIA_REPO_URL, // the app's identifier
-				'X-OpenRouter-Title': 'Kodia',
+				'X-OpenRouter-Title': 'BharatCode Studio',
 				'X-OpenRouter-Categories': 'ide-extension,programming-app', // at most 2 per request
 			},
 			...commonPayloadOpts,
@@ -241,7 +241,7 @@ const newOpenAICompatibleSDK = async ({ settingsOfProvider, providerName }: { se
 		return new OpenAI({ baseURL: 'https://api.mistral.ai/v1', apiKey: thisConfig.apiKey, ...commonPayloadOpts })
 	}
 
-	else throw new Error(`Kodia providerName was invalid: ${providerName}.`)
+	else throw new Error(`BharatCode Studio providerName was invalid: ${providerName}.`)
 }
 
 
@@ -605,7 +605,7 @@ const _sendXAIResponsesChat = async ({ openai, apiKey, modelName, messages, tool
 
 		const toolCalls = finalToolCallsOf(streamedToolCalls)
 		if (!fullTextSoFar && !fullReasoningSoFar && toolCalls.length === 0) {
-			onError({ message: 'Kodia: Response from model was empty.', fullError: null })
+			onError({ message: 'BharatCode Studio: Response from model was empty.', fullError: null })
 		}
 		else {
 			onFinalMessage({ fullText: fullTextSoFar, fullReasoning: fullReasoningSoFar, anthropicReasoning: null, toolCalls, usage })
@@ -765,7 +765,7 @@ const _sendOpenAICompatibleChat = async ({ messages, onText, onFinalMessage, onE
 				}
 			}
 			if (!fullTextSoFar && !fullReasoningSoFar && toolCalls.length === 0) {
-				onError({ message: 'Kodia: Response from model was empty.', fullError: null })
+				onError({ message: 'BharatCode Studio: Response from model was empty.', fullError: null })
 			}
 			else {
 				onFinalMessage({ fullText: shownText(fullTextSoFar), fullReasoning: fullReasoningSoFar, anthropicReasoning: null, toolCalls, usage });
@@ -915,7 +915,7 @@ const anthropicThinkingOptions = (recognizedModelName: string | undefined, paylo
 	const newThinking: { [key: string]: unknown } = { ...thinking }
 	// without it, these models return empty thinking text and the reasoning panel stays blank
 	if (anthropicModelFeatures.summarizedThinkingDisplay.has(recognizedModelName)) newThinking.display = 'summarized'
-	// Thinking blocks are bound to everything before them; Kodia's history can legitimately change (a new turn's
+	// Thinking blocks are bound to everything before them; BharatCode Studio's history can legitimately change (a new turn's
 	// system prompt, a model switch, context clearing). Drop the stale blocks instead of failing with a 400.
 	if (anthropicModelFeatures.thinkingBlockBinding.has(recognizedModelName)) {
 		newThinking.block_binding = { prefix_mismatch_behavior: 'drop_block' }
@@ -1055,7 +1055,7 @@ const sendAnthropicChat = async ({ messages, providerName, onText, onFinalMessag
 		// with drop_block, stale thinking blocks are dropped and listed here; worth a look if it happens every request
 		const dropped = ((response as { input_transformations?: { type?: string, reason?: string, path?: string }[] }).input_transformations ?? [])
 			.filter(t => t.type === 'thinking_dropped' && t.reason === 'prefix_binding_mismatch')
-		if (dropped.length) console.warn(`Kodia: the API dropped ${dropped.length} thinking block(s) bound to an earlier version of the conversation (first: ${dropped[0].path}).`)
+		if (dropped.length) console.warn(`BharatCode Studio: the API dropped ${dropped.length} thinking block(s) bound to an earlier version of the conversation (first: ${dropped[0].path}).`)
 
 		const anthropicReasoning = response.content.filter(c => c.type === 'thinking' || c.type === 'redacted_thinking')
 		const toolCalls = response.content
@@ -1127,7 +1127,7 @@ const sendMistralFIM = async ({ messages, onFinalMessage, onError, settingsOfPro
 // ------------ OLLAMA ------------
 const newOllamaSDK = async ({ endpoint }: { endpoint: string }) => {
 	// if endpoint is empty, normally ollama will send to 11434, but we want it to fail - the user should type it in
-	if (!endpoint) throw new Error(`Ollama Endpoint was empty (please enter ${defaultProviderSettings.ollama.endpoint} in Kodia if you want the default url).`)
+	if (!endpoint) throw new Error(`Ollama Endpoint was empty (please enter ${defaultProviderSettings.ollama.endpoint} in BharatCode Studio if you want the default url).`)
 	const { Ollama } = await import('ollama')
 	const ollama = new Ollama({ host: endpoint })
 	return ollama
@@ -1333,7 +1333,7 @@ const sendGeminiChat = async ({
 			// on final
 			const toolCalls = finalToolCallsOf(streamedToolCalls)
 			if (!fullTextSoFar && !fullReasoningSoFar && toolCalls.length === 0) {
-				onError({ message: 'Kodia: Response from model was empty.', fullError: null })
+				onError({ message: 'BharatCode Studio: Response from model was empty.', fullError: null })
 			} else {
 				onFinalMessage({ fullText: withOutputLimitNotice(fullTextSoFar, reachedOutputLimit), fullReasoning: fullReasoningSoFar, anthropicReasoning: null, toolCalls, usage, ...(reachedOutputLimit ? { reachedOutputLimit } : {}) });
 			}

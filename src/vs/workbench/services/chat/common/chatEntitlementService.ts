@@ -456,7 +456,7 @@ export class ChatEntitlementService extends Disposable implements IChatEntitleme
 		}
 
 		if (!productService.defaultChatAgent || productService.defaultChatAgent.provider.default.id === 'void') {
-			ChatEntitlementContextKeys.Setup.hidden.bindTo(this.contextKeyService).set(true); // Kodia: hide Copilot UI; Kodia chat is built-in
+			ChatEntitlementContextKeys.Setup.hidden.bindTo(this.contextKeyService).set(true); // BharatCode Studio: hide Copilot UI; BharatCode Studio chat is built-in
 			return;
 		}
 

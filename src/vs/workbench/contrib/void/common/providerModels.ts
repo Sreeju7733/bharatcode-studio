@@ -7,15 +7,15 @@ import { canonicalModelNameForProvider } from './localSingleModelProviders.js';
 import { catalogModelsOfProvider, defaultModelsOfProvider, VoidStaticModelInfo } from './modelCapabilities.js';
 import { ProviderName } from './voidSettingsTypes.js';
 
-// A model a provider's API lists, with the capabilities the API gives (none when it only gives names). Kodia adds them
+// A model a provider's API lists, with the capabilities the API gives (none when it only gives names). BharatCode Studio adds them
 // to the provider's models besides its default one, switched off.
 export type DetectedModel = { modelName: string; capabilities?: Partial<VoidStaticModelInfo> };
 
-// the providers whose model list Kodia reads with the user's API key (OpenRouter's is public, see openRouterModels.ts)
+// the providers whose model list BharatCode Studio reads with the user's API key (OpenRouter's is public, see openRouterModels.ts)
 export const listableProviderNames = ['anthropic', 'openAI', 'gemini', 'mistral', 'xAI', 'groq', 'deepseek'] as const satisfies ProviderName[];
 export type ListableProviderName = typeof listableProviderNames[number];
 
-// the fields Kodia reads, from each provider's API reference
+// the fields BharatCode Studio reads, from each provider's API reference
 type AnthropicModel = {
 	id: string;
 	lifecycle?: 'active' | 'deprecated' | 'retired';
@@ -45,7 +45,7 @@ type DeepSeekModel = { id: string; context_window?: number; max_output_tokens?: 
 
 // what isn't a chat model, by name: these lists mix in embeddings, images, voice, moderation...
 const notChatModel: { [providerName in ListableProviderName]?: RegExp } = {
-	// besides Kodia's chat completions, OpenAI has models only the Responses API serves (codex, -pro, deep research)
+	// besides BharatCode Studio's chat completions, OpenAI has models only the Responses API serves (codex, -pro, deep research)
 	openAI: /embedding|whisper|tts|transcribe|dall-e|image|realtime|audio|live|voice|speech|search|moderation|instruct|computer-use|deep-research|sora|codex|davinci|babbage|-pro\b/,
 	// Gemma on the Gemini API has neither tools nor a system message
 	gemini: /embedding|imagen|veo|tts|image|audio|live|voice|aqa|gemma|robotics|learnlm|computer-use/,
@@ -55,7 +55,7 @@ const notChatModel: { [providerName in ListableProviderName]?: RegExp } = {
 	xAI: /voice|tts|speech|transcri/,
 };
 
-// what Kodia no longer offers though the API still lists it: Gemini 1 and 2; 3.7 and 3.5 Flash, whose requests Google
+// what BharatCode Studio no longer offers though the API still lists it: Gemini 1 and 2; 3.7 and 3.5 Flash, whose requests Google
 // serves with 3.8 and 3.6 Flash; 3.1 Flash-Lite, deprecated; DeepSeek's retired V4 Flash, served by deepseek-flash.
 // https://ai.google.dev/gemini-api/docs/deprecations, https://api-docs.deepseek.com/quick_start/pricing
 const notOfferedModel: { [providerName in ListableProviderName]?: RegExp } = {
@@ -65,7 +65,7 @@ const notOfferedModel: { [providerName in ListableProviderName]?: RegExp } = {
 
 const positive = (n: number | null | undefined) => typeof n === 'number' && n > 0 ? n : undefined;
 
-// drops the keys the API didn't give, so that what Kodia knows of the model from its name stays
+// drops the keys the API didn't give, so that what BharatCode Studio knows of the model from its name stays
 const definedOnly = (capabilities: Partial<VoidStaticModelInfo>): Partial<VoidStaticModelInfo> | undefined => {
 	const entries = Object.entries(capabilities).filter(([, v]) => v !== undefined);
 	return entries.length ? Object.fromEntries(entries) as Partial<VoidStaticModelInfo> : undefined;
@@ -74,7 +74,7 @@ const definedOnly = (capabilities: Partial<VoidStaticModelInfo>): Partial<VoidSt
 // a snapshot of another model: claude-x-20261001, gpt-x-2026-09-01, gemini-x-001, gpt-4-0613
 export const withoutSnapshotSuffix = (modelName: string) => modelName.replace(/-(\d{4}-\d{2}-\d{2}|\d{8}|\d{3,4})$/, '');
 
-// in the provider's section already: its default model, or a legacy name Kodia maps to a catalog model
+// in the provider's section already: its default model, or a legacy name BharatCode Studio maps to a catalog model
 const isDefaultModel = (providerName: ListableProviderName, modelName: string) => {
 	const lower = modelName.toLowerCase();
 	if (canonicalModelNameForProvider(providerName, modelName).toLowerCase() !== lower) return true;
@@ -94,7 +94,7 @@ const anthropicModels = (models: AnthropicModel[]): DetectedModel[] => models
 				reservedOutputTokenSpace: positive(m.max_tokens),
 				supportsVision: m.capabilities?.image_input?.supported,
 				supportsPDF: m.capabilities?.pdf_input?.supported,
-				// the budget-based thinking of older models is left to what Kodia knows from the name
+				// the budget-based thinking of older models is left to what BharatCode Studio knows from the name
 				reasoningCapabilities: thinking?.supported === false ? false
 					: thinking?.types?.adaptive?.supported ? { supportsReasoning: true, canTurnOffReasoning: thinking.types.disabled?.supported !== false, canIOReasoning: true, reasoningSlider: { type: 'adaptive' } }
 						: undefined,
@@ -192,7 +192,7 @@ export const mostUsedModelNames = (providerName: ListableProviderName, modelName
 
 // The chat models a provider's API lists besides its default model, from the list the main process fetched
 // (listProviderModels). A snapshot of a catalog model goes by the catalog's name (claude-x-20261001 → claude-x), whose
-// capabilities Kodia has; the snapshots of another listed model are left out.
+// capabilities BharatCode Studio has; the snapshots of another listed model are left out.
 export const detectedModelsOfProvider = (providerName: ListableProviderName, response: unknown): DetectedModel[] => {
 	const models = listOf(response).filter((m): m is { id?: unknown; name?: unknown } => typeof m === 'object' && m !== null);
 	const withName = models.filter(m => typeof (providerName === 'gemini' ? m.name : m.id) === 'string');

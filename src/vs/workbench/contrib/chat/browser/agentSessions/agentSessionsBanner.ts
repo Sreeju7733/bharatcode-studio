@@ -35,7 +35,7 @@ export interface IAgentsBannerResult {
 }
 
 /**
- * Kodia: the Agents Window UI is intentionally hidden, so the
+ * BharatCode Studio: the Agents Window UI is intentionally hidden, so the
  * "Try out the new Agents window" banner (welcome page / agent sessions
  * welcome) is never promoted. Set this back to `true` to restore the banner.
  */

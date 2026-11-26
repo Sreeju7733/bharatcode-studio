@@ -2354,13 +2354,13 @@ configurationRegistry.registerConfiguration({
 		[ChatAIDisabledSettingId]: {
 			type: 'boolean',
 			description: nls.localize('chat.disableAIFeatures', "Disable and hide built-in AI features provided by GitHub Copilot, including chat and inline suggestions."),
-			default: true, // Kodia: Copilot disabled by default
+			default: true, // BharatCode Studio: Copilot disabled by default
 			scope: ConfigurationScope.WINDOW,
 		},
 		[ChatConfiguration.TitleBarSignInEnabled]: {
 			type: 'boolean',
 			description: nls.localize('chat.titleBar.signIn.enabled', "Controls whether the Copilot Sign In button is shown in the title bar when signed out. When disabled, the Sign In affordance falls back to the status bar."),
-			default: false, // Kodia: hide Copilot Sign In in title bar
+			default: false, // BharatCode Studio: hide Copilot Sign In in title bar
 		},
 		[ChatConfiguration.WelcomePageSignInEnabled]: {
 			type: 'boolean',
@@ -3242,7 +3242,7 @@ AccessibleViewRegistry.register(new AgentChatAccessibilityHelp());
 AccessibleViewRegistry.register(new ChatFindAccessibilityHelp());
 AccessibleViewRegistry.register(new ChatPetAchievementsAccessibilityHelp());
 
-// Kodia: the Agents window's input holds a reference to its model through this provider and
+// BharatCode Studio: the Agents window's input holds a reference to its model through this provider and
 // disposes the model when the reference cannot be resolved, which leaves the input unusable.
 registerEditorFeature(ChatInputBoxContentProvider);
 

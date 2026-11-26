@@ -7,7 +7,7 @@ import { findLastIdx } from '../../../../../base/common/arraysFind.js';
 import { KEEP_RECENT_STEPS, MIN_STEPS_TO_SUMMARIZE } from '../../../../../platform/kodia/common/threadSummary.js';
 import { ChatMessage } from '../chatThreadServiceTypes.js';
 
-// the transcript the model summarizes is shared with the Kodia agent of the Agents window
+// the transcript the model summarizes is shared with the BharatCode Studio agent of the Agents window
 export { transcriptForSummary } from '../../../../../platform/kodia/common/threadSummary.js';
 
 // Which messages a summary replaces, and the transcript the model summarizes (see ContextSummaryEntry).

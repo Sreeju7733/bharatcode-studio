@@ -3,7 +3,7 @@
  *  Licensed under the Apache License, Version 2.0. See LICENSE.txt for more information.
  *--------------------------------------------------------------------------------------*/
 
-// The ranking behind the `search_codebase` tool of Kodia's chat and of the Kodia agent: from a question or a few
+// The ranking behind the `search_codebase` tool of BharatCode Studio's chat and of the BharatCode Studio agent: from a question or a few
 // keywords, the passages of the project that say the most about it. It ranks by the words of the query (BM25 over
 // passages of a file), with no index and no embedding model, so it works at once on any project and with any model.
 // Each side finds the files that hold the words (`searchTermsOf`) its own way, then gives them here to be ranked.

@@ -12,7 +12,7 @@ import { StorageTarget, StorageScope } from '../../../../platform/storage/common
 import { IApplicationStorageMainService } from '../../../../platform/storage/electron-main/storageMainService.js';
 
 import { IMetricsService } from '../common/metricsService.js';
-// Kodia: posthog-node is loaded with `await import(...)`, as a static import of an npm package makes the
+// BharatCode Studio: posthog-node is loaded with `await import(...)`, as a static import of an npm package makes the
 // packaged app fail to start (VS Code 1.141 bundles the main process into one file).
 import type { PostHog } from 'posthog-node'
 import { OPT_OUT_KEY } from '../common/storageKeys.js';
@@ -42,7 +42,7 @@ export class MetricsMainService extends Disposable implements IMetricsService {
 	private _initProperties: object = {}
 
 
-	// helper - looks like this is stored in a .vscdb file in ~/Library/Application Support/Kodia
+	// helper - looks like this is stored in a .vscdb file in ~/Library/Application Support/BharatCode Studio
 	private _memoStorage(key: string, target: StorageTarget, setValIfNotExist?: string) {
 		const currVal = this._appStorage.get(key, StorageScope.APPLICATION)
 		if (currVal !== undefined) return currVal
@@ -127,11 +127,11 @@ export class MetricsMainService extends Disposable implements IMetricsService {
 
 	const didOptOut = true // Force opt-out for AI Stats
 
-	console.log('User is opted out of basic Kodia metrics?', didOptOut)
+	console.log('User is opted out of basic BharatCode Studio metrics?', didOptOut)
 	this.client.then(client => client.optOut())
 
 
-		console.log('Kodia posthog metrics info:', JSON.stringify(identifyMessage, null, 2))
+		console.log('BharatCode Studio posthog metrics info:', JSON.stringify(identifyMessage, null, 2))
 	}
 
 

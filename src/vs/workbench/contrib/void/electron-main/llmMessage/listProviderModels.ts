@@ -8,7 +8,7 @@ import { ListableProviderName } from '../../common/providerModels.js';
 const TIMEOUT_MS = 20_000;
 const MAX_PAGES = 10;
 
-// the fields of the responses Kodia reads here; providerModels.ts reads the models
+// the fields of the responses BharatCode Studio reads here; providerModels.ts reads the models
 type ListResponse = { data?: unknown; models?: unknown; has_more?: unknown; last_id?: unknown; nextPageToken?: unknown };
 type Model = { id?: unknown; context_length?: unknown };
 
@@ -25,8 +25,8 @@ const getJson = async (url: string, headers: Record<string, string>): Promise<Li
 const arrayOf = (value: unknown): Model[] => Array.isArray(value) ? value : [];
 const bearer = (apiKey: string) => ({ Authorization: `Bearer ${apiKey}` });
 
-// Kodia: a provider's list of models, fetched with the user's key, as its API returns it (providerModels.ts keeps the
-// chat models Kodia's catalog doesn't have). Throws when the provider can't be reached or refuses the key.
+// BharatCode Studio: a provider's list of models, fetched with the user's key, as its API returns it (providerModels.ts keeps the
+// chat models BharatCode Studio's catalog doesn't have). Throws when the provider can't be reached or refuses the key.
 export const listProviderModels = async (providerName: ListableProviderName, apiKey: string): Promise<unknown[]> => {
 	switch (providerName) {
 		case 'anthropic': {

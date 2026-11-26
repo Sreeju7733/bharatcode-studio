@@ -21,15 +21,15 @@ const KEY_CHANGE_DELAY_MS = 2_000; // a key being typed or pasted
 const MOST_USED_COUNT = 5;
 const BEST_FREE_COUNT = 5;
 
-// the providers whose key changes what Kodia lists
+// the providers whose key changes what BharatCode Studio lists
 const keyedProviderNames = [...listableProviderNames, 'openRouter'] as const;
 type KeyedProviderName = typeof keyedProviderNames[number];
 
-// Kodia: lists in each provider's section, besides its default model, the models its API has, with the capabilities
+// BharatCode Studio: lists in each provider's section, besides its default model, the models its API has, with the capabilities
 // the API gives: for OpenRouter, the 5 best free models for code and the 5 most used others that can run the agent;
 // for every provider with an API key, its chat models. These OpenRouter models and each provider's 5 most used on
 // OpenRouter last week start switched on, the others switched off. At startup, then every day, and when a key changes.
-// Kodia reads OpenRouter's list (public) only once a provider has a key: until then, it contacts no one.
+// BharatCode Studio reads OpenRouter's list (public) only once a provider has a key: until then, it contacts no one.
 export class ProviderModelsContrib extends Disposable {
 	static readonly ID = 'workbench.contrib.kodia.providerModels';
 
@@ -103,7 +103,7 @@ export class ProviderModelsContrib extends Disposable {
 			const models = (await asJson<{ data?: OpenRouterModel[] }>(context))?.data;
 			return Array.isArray(models) ? models : undefined;
 		} catch (e) {
-			this.logService.info('[Kodia] Could not list OpenRouter\'s models', e);
+			this.logService.info('[BharatCode Studio] Could not list OpenRouter\'s models', e);
 			return undefined;
 		}
 	}
@@ -134,7 +134,7 @@ export class ProviderModelsContrib extends Disposable {
 		const models = await this.llmMessageService.listProviderModels(providerName, apiKey);
 		if (!models) {
 			// the provider couldn't be reached, or refused the key: keep the models found last time
-			this.logService.info(`[Kodia] Could not list ${providerName}'s models`);
+			this.logService.info(`[BharatCode Studio] Could not list ${providerName}'s models`);
 			return;
 		}
 		const detected = detectedModelsOfProvider(providerName, models);

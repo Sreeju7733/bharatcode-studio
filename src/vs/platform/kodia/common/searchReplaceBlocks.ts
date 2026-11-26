@@ -5,7 +5,7 @@
 
 // SEARCH/REPLACE blocks, the format `edit_file` and Apply edit a file with: the format and its description for the
 // model, the parser of a model's blocks (which may still be streaming in), and the edit itself. Pure text, so the editor
-// (which applies the edit to a model, with a diff to review) and the Kodia agent of the Agents window (which writes the
+// (which applies the edit to a model, with a diff to review) and the BharatCode Studio agent of the Agents window (which writes the
 // file) edit the same way.
 
 
@@ -219,7 +219,7 @@ export const searchReplaceErrorMessage = (
  * The file's contents (with "\n" line endings) once the SEARCH/REPLACE blocks of `blocksStr` are applied: each block
  * replaces the whole lines its ORIGINAL text is found on. Throws, with a message for the model, if there is no block,
  * or a block's ORIGINAL isn't found, overlaps another one, or (with `requireUnique`) isn't the only match: the
- * editor keeps the first match, the Kodia agent refuses an edit it can't place with certainty.
+ * editor keeps the first match, the BharatCode Studio agent refuses an edit it can't place with certainty.
  */
 export const applySearchReplaceBlocks = (fileContents: string, blocksStr: string, opts?: { requireUnique?: boolean }): string => {
 	const blocks = extractSearchReplaceBlocks(blocksStr)

@@ -324,7 +324,7 @@ class ConvertToLLMMessageService extends Disposable implements IConvertToLLMMess
 	// --- FIM ---
 
 	prepareFIMMessage: IConvertToLLMMessageService['prepareFIMMessage'] = ({ messages }) => {
-		// Get combined AI instructions with the provided aiInstructions as the base. Only Kodia's own rules file, and no
+		// Get combined AI instructions with the provided aiInstructions as the base. Only BharatCode Studio's own rules file, and no
 		// frameworks: autocomplete sends them with every keystroke, and other agents' files (AGENTS.md, ...) are often long
 		const combinedInstructions = this._getCombinedAIInstructions(['.voidrules'], false);
 

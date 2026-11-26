@@ -899,7 +899,7 @@ export class ToolsService implements IToolsService {
 				}
 				// normal command
 				if (resolveReason.type === 'timeout') {
-					return `${result_}\nTerminal command ran, but was automatically killed by Kodia after ${MAX_TERMINAL_INACTIVE_TIME}s of inactivity and did not finish successfully. To try with more time, open a persistent terminal and run the command there.`
+					return `${result_}\nTerminal command ran, but was automatically killed by BharatCode Studio after ${MAX_TERMINAL_INACTIVE_TIME}s of inactivity and did not finish successfully. To try with more time, open a persistent terminal and run the command there.`
 				}
 				throw new Error(`Unexpected internal error: Terminal command did not resolve with a valid reason.`)
 			},
@@ -927,7 +927,7 @@ export class ToolsService implements IToolsService {
 			},
 		}
 
-		// The Kodia agent of the Agents Window asks an editor window to run these: the same validation, call and text as the chat's.
+		// The BharatCode Studio agent of the Agents Window asks an editor window to run these: the same validation, call and text as the chat's.
 		// The TypeScript language server only reports the errors of the files that are in a tab, so the file the agent asks the
 		// errors of is put in one, behind the user's own, and taken out again. A file the user has open is already analyzed.
 		const inATab = async (uri: URI): Promise<(() => Promise<void>) | undefined> => {

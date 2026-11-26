@@ -32,7 +32,7 @@ export interface IUpdateURLOptions {
 }
 
 export function createUpdateURL(baseUpdateUrl: string, platform: string, quality: string, _commit: string, _options?: IUpdateURLOptions): string {
-	// Kodia: a static manifest per platform instead of Microsoft's update API, see kodiaUpdate.ts
+	// BharatCode Studio: a static manifest per platform instead of Microsoft's update API, see kodiaUpdate.ts
 	return new URL(createKodiaUpdateURL(baseUpdateUrl, platform, quality)).toString();
 }
 
@@ -664,7 +664,7 @@ export abstract class AbstractUpdateService extends Disposable implements IUpdat
 			const context = await this.requestService.request({ url, headers, callSite: 'updateService.isLatestVersion' }, token);
 			const statusCode = context.res.statusCode;
 			this.logService.trace('update#isLatestVersion() - response', { statusCode });
-			// Kodia: the feed always describes the latest release, see kodiaUpdate.ts
+			// BharatCode Studio: the feed always describes the latest release, see kodiaUpdate.ts
 			const update = await asJson<IUpdate>(context);
 			return !isNewerUpdate(update, this.getBaselineUpdate(commit));
 
@@ -680,7 +680,7 @@ export abstract class AbstractUpdateService extends Disposable implements IUpdat
 	}
 
 	/**
-	 * Kodia: what the feed's release is compared with (see isNewerUpdate): the pending update being overwritten when
+	 * BharatCode Studio: what the feed's release is compared with (see isNewerUpdate): the pending update being overwritten when
 	 * `pendingCommit` is given, else this build. Read it before leaving the state that holds the pending update.
 	 */
 	protected getBaselineUpdate(pendingCommit?: string): IUpdate {

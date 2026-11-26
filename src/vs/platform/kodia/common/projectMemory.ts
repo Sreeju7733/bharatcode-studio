@@ -3,12 +3,12 @@
  *  Licensed under the Apache License, Version 2.0. See LICENSE.txt for more information.
  *--------------------------------------------------------------------------------------*/
 
-// The project memory's file format, shared by Kodia's chat and the Kodia agent of the Agents window.
+// The project memory's file format, shared by BharatCode Studio's chat and the Kodia agent of the Agents window.
 
 // In the repo, so people can read, edit, version and share it; the agent keeps it in "## Section"s.
 export const PROJECT_MEMORY_FILE_PATH = '.bharatcode/memory.md'
 
-export const PROJECT_MEMORY_FILE_HEADER = `<!-- Notes Kodia's agent keeps about this project across sessions (write_project_memory rewrites one "## " section at a time). Edit freely. -->`
+export const PROJECT_MEMORY_FILE_HEADER = `<!-- Notes BharatCode Studio's agent keeps about this project across sessions (write_project_memory rewrites one "## " section at a time). Edit freely. -->`
 
 // the whole memory is sent with every request
 export const MAX_PROJECT_MEMORY_TOKENS = 2_000
@@ -43,7 +43,7 @@ export const memoryWithSection = (memory: string, title: string, content: string
 	return renderMemorySections(parsed)
 }
 
-// The section of a prompt that holds the project's memory, in Kodia's chat and for the Kodia agent of the Agents window
+// The section of a prompt that holds the project's memory, in BharatCode Studio's chat and for the BharatCode Studio agent of the Agents window
 export const projectMemoryPrompt = (memory: string) =>
 	`PROJECT MEMORY (${PROJECT_MEMORY_FILE_PATH}: notes kept across sessions; rewrite a section with write_project_memory when something here is outdated or worth adding):\n${memory}`
 

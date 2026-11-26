@@ -81,14 +81,14 @@ export const dedupeProviderModels = (providerName: ProviderName, models: VoidSta
 }
 
 // A recent mlx_lm.server lists every model of the Hugging Face cache, not the one it was started with, and loads the one a
-// request names: Kodia lists them all, as for the other local servers, instead of the first of them, which was not the one
+// request names: BharatCode Studio lists them all, as for the other local servers, instead of the first of them, which was not the one
 // the user started (Qwen2.5-Coder) but whichever the cache listed first.
 export const normalizeAutodetectedModelNamesForProvider = (providerName: ProviderName, modelNames: string[]): string[] => {
 	return [...new Set(modelNames.map(n => canonicalModelNameForProvider(providerName, n)))]
 }
 
 /**
- * Kodia: the context window a local server says a listed model has, in tokens, or undefined when it doesn't say.
+ * BharatCode Studio: the context window a local server says a listed model has, in tokens, or undefined when it doesn't say.
  * What is loaded comes first: LM Studio loads a model with a smaller window than the model can take
  * (`loaded_context_length` under `max_context_length`, at /api/v0/models), and vLLM serves `max_model_len`.
  */
@@ -102,7 +102,7 @@ export const contextWindowOfListedModel = (model: unknown): number | undefined =
 	return undefined
 }
 
-/** Kodia: the context window of each listed model that has one, by the name Kodia lists the model under. */
+/** BharatCode Studio: the context window of each listed model that has one, by the name BharatCode Studio lists the model under. */
 export const contextWindowsOfListedModels = (providerName: ProviderName, models: readonly unknown[]): Record<string, { contextWindow: number }> => {
 	const windows: Record<string, { contextWindow: number }> = {}
 	for (const model of models) {

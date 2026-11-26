@@ -15,12 +15,12 @@ export function createKodiaUpdateURL(baseUpdateUrl: string, platform: string, qu
 	return `${baseUpdateUrl}/${quality}/${platform}/latest.json`;
 }
 
-/** This build's release name, "<VS Code version>-<Kodia version>" like its release tag, e.g. 1.141.0-2.5.5. */
-export function getKodiaReleaseName(productService: IProductService): string | undefined {
+/** This build's release name, "<VS Code version>-<BharatCode Studio version>" like its release tag, e.g. 1.141.0-2.5.5. */
+export function getBharatCode StudioReleaseName(productService: IProductService): string | undefined {
 	return productService.voidVersion ? `${productService.version}-${productService.voidVersion}` : undefined;
 }
 
-/** Whether release name `a` is newer than `b`, comparing "<VS Code version>-<Kodia version>" numerically. */
+/** Whether release name `a` is newer than `b`, comparing "<VS Code version>-<BharatCode Studio version>" numerically. */
 export function isNewerRelease(a: string, b: string): boolean {
 	const parse = (name: string) => /^(\d+)\.(\d+)\.(\d+)-(\d+)\.(\d+)\.(\d+)$/.exec(name)?.slice(1).map(Number);
 	const pa = parse(a), pb = parse(b);

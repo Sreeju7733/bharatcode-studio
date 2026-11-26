@@ -3,7 +3,7 @@
  *  Licensed under the Apache License, Version 2.0. See LICENSE.txt for more information.
  *--------------------------------------------------------------------------------------*/
 
-// Fetching a web page as text, for Kodia's chat (fetch_url) and the Kodia agent of the Agents window.
+// Fetching a web page as text, for Kodia's chat (fetch_url) and the BharatCode Studio agent of the Agents window.
 
 import { htmlToText } from '../common/htmlToText.js';
 
@@ -43,7 +43,7 @@ export const fetchWebPage = async (url: string, signal?: AbortSignal): Promise<W
 		redirect: 'follow',
 		signal: signal ? AbortSignal.any([signal, timeoutSignal]) : timeoutSignal,
 		headers: {
-			'User-Agent': 'Mozilla/5.0 (compatible; Kodia; +https://github.com/jcommaret/kodia)',
+			'User-Agent': 'Mozilla/5.0 (compatible; BharatCode Studio; +https://github.com/jcommaret/kodia)',
 			'Accept': 'text/html,application/xhtml+xml,text/plain,text/markdown,application/json;q=0.9,*/*;q=0.5',
 		},
 	}).catch((e: Error) => { throw new Error(e.name === 'TimeoutError' ? `Timed out after ${FETCH_TIMEOUT_MS / 1000}s.` : `Request failed: ${e.message}`) })

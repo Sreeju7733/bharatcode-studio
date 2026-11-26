@@ -10,12 +10,12 @@ import { AnthropicReasoning, LLMUsage, OnFinalMessage, RawToolParamsObj } from '
 import { ToolName } from './toolsServiceTypes.js';
 
 /**
- * Kodia: conversions between the Kodia agent's wire shapes (the BYOK bridge's
- * Responses-like items, see `kodiaAgentHostLm.ts`) and Kodia's LLM service.
+ * BharatCode Studio: conversions between the BharatCode Studio agent's wire shapes (the BYOK bridge's
+ * Responses-like items, see `kodiaAgentHostLm.ts`) and BharatCode Studio's LLM service.
  */
 
 /** Kodia's simple messages (`IConvertToLLMMessageService.prepareLLMSimpleMessages`): a user's message carries the images attached to it. */
-export type KodiaAgentSimpleMessage =
+export type BharatCode StudioAgentSimpleMessage =
 	| { role: 'user'; content: string; media?: ChatMedia[] }
 	| { role: 'assistant'; content: string; anthropicReasoning: AnthropicReasoning[] | null }
 	| { role: 'tool'; content: string; id: string; name: ToolName; rawParams: RawToolParamsObj };
@@ -52,18 +52,18 @@ function anthropicReasoningOf(item: IByokLmReasoningItem): AnthropicReasoning[] 
 }
 
 /**
- * The agent's history as Kodia's simple messages. A model response is a run of
- * items (reasoning, text, tool calls) and Kodia pairs each tool call with its
+ * The agent's history as BharatCode Studio's simple messages. A model response is a run of
+ * items (reasoning, text, tool calls) and BharatCode Studio pairs each tool call with its
  * result, right after the assistant message that made it.
  */
-export function toSimpleMessages(input: readonly IByokLmInputItem[]): KodiaAgentSimpleMessage[] {
+export function toSimpleMessages(input: readonly IByokLmInputItem[]): BharatCode StudioAgentSimpleMessage[] {
 	const outputs = new Map<string, string>();
 	for (const item of input) {
 		if (item.type === 'function_call_output' || item.type === 'custom_tool_call_output') {
 			outputs.set(item.callId, item.output);
 		}
 	}
-	const messages: KodiaAgentSimpleMessage[] = [];
+	const messages: BharatCode StudioAgentSimpleMessage[] = [];
 	let reasoning: AnthropicReasoning[] | null = null;
 	// Whether the latest item belongs to the model response being read, so a tool call joins its assistant message.
 	let inResponse = false;

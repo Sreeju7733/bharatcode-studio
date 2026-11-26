@@ -3,7 +3,7 @@
  *  Licensed under the Apache License, Version 2.0. See LICENSE.txt for more information.
  *--------------------------------------------------------------------------------------*/
 
-// What Kodia's chat and the Kodia agent of the Agents window do when a conversation outgrows the model's context
+// What Kodia's chat and the BharatCode Studio agent of the Agents window do when a conversation outgrows the model's context
 // window: first the results of old tool calls are cleared, then the model summarizes the older messages. The prompts,
 // the stub, the transcript the model summarizes and the sizes are shared; which messages a summary replaces depends on
 // each side's own message shape.
@@ -48,7 +48,7 @@ export const summarizedThreadMessage = (summary: string, latestRequest: string |
 	...latestRequest !== undefined ? [`THE USER'S CURRENT REQUEST, which you are working on:\n${latestRequest}`] : [],
 ].join('\n\n')
 
-// a message of a conversation, as far as a summary needs: Kodia's chat messages and the agent's both fit
+// a message of a conversation, as far as a summary needs: BharatCode Studio's chat messages and the agent's both fit
 export type SummarizableMessage = {
 	readonly role: string,
 	readonly content?: unknown,

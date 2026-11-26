@@ -93,7 +93,7 @@ export class VoidMainUpdateService extends Disposable implements IVoidUpdateServ
 
 		if (this._updateService.state.type === StateType.Ready) {
 			// Update is ready
-			return { message: 'Restart Kodia to update!', action: 'restart' } as const
+			return { message: 'Restart BharatCode Studio to update!', action: 'restart' } as const
 		}
 
 		if (this._updateService.state.type === StateType.Disabled) {
@@ -114,7 +114,7 @@ export class VoidMainUpdateService extends Disposable implements IVoidUpdateServ
 			const data = await response.json();
 			const latestVersion: string = data.tag_name;
 
-			// Release tags are "<VS Code version>-<Kodia version>", e.g. 1.141.0-2.5.0
+			// Release tags are "<VS Code version>-<BharatCode Studio version>", e.g. 1.141.0-2.5.0
 			const myVersion = `${this._productService.version}-${this._productService.voidVersion}`
 
 			const isUpToDate = !isNewerRelease(latestVersion, myVersion) // only makes sense if response.ok
@@ -126,11 +126,11 @@ export class VoidMainUpdateService extends Disposable implements IVoidUpdateServ
 			if (explicit) {
 				if (response.ok) {
 					if (!isUpToDate) {
-						message = 'A new version of Kodia is available! Please reinstall (auto-updates are disabled on this OS) - it only takes a second!'
+						message = 'A new version of BharatCode Studio is available! Please reinstall (auto-updates are disabled on this OS) - it only takes a second!'
 						action = 'reinstall'
 					}
 					else {
-						message = 'Kodia is up-to-date!'
+						message = 'BharatCode Studio is up-to-date!'
 					}
 				}
 				else {
@@ -142,7 +142,7 @@ export class VoidMainUpdateService extends Disposable implements IVoidUpdateServ
 			else {
 				if (response.ok && !isUpToDate && latestVersion !== this._autoAnnouncedRelease) {
 					this._autoAnnouncedRelease = latestVersion
-					message = 'A new version of Kodia is available! Please reinstall (auto-updates are disabled on this OS) - it only takes a second!'
+					message = 'A new version of BharatCode Studio is available! Please reinstall (auto-updates are disabled on this OS) - it only takes a second!'
 					action = 'reinstall'
 				}
 				else {
@@ -166,7 +166,7 @@ export class VoidMainUpdateService extends Disposable implements IVoidUpdateServ
 }
 
 
-/** Whether release tag `a` is newer than `b`, comparing "<VS Code version>-<Kodia version>" numerically. */
+/** Whether release tag `a` is newer than `b`, comparing "<VS Code version>-<BharatCode Studio version>" numerically. */
 function isNewerRelease(a: string, b: string): boolean {
 	const parse = (tag: string) => /^(\d+)\.(\d+)\.(\d+)-(\d+)\.(\d+)\.(\d+)$/.exec(tag)?.slice(1).map(Number);
 	const pa = parse(a), pb = parse(b);

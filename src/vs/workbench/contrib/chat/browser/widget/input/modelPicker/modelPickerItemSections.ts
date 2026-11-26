@@ -130,7 +130,7 @@ export function buildUnavailableStateItems(options: IBuildModelPickerItemsOption
 	}, ...manageModelsItemsForFlatList(options)];
 }
 
-/** Kodia: "Manage Models..." after a separator, for the flat list and its empty state (see `showManageModelsInFlatList`). */
+/** BharatCode Studio: "Manage Models..." after a separator, for the flat list and its empty state (see `showManageModelsInFlatList`). */
 function manageModelsItemsForFlatList(options: IBuildModelPickerItemsOptions): IActionListItem<IActionWidgetDropdownAction>[] {
 	if (!options.presentation.showManageModelsInFlatList || !options.manageModelsAction) {
 		return [];
@@ -175,7 +175,7 @@ export function buildFlatModelItems(options: IBuildModelPickerItemsOptions): IAc
 	const sortedModels = options.models
 		.filter(model => !leadingModels.includes(model))
 		.sort((left, right) => left.metadata.vendor.localeCompare(right.metadata.vendor) || left.metadata.name.localeCompare(right.metadata.name));
-	// Kodia: the models of `leadingModels` first, under their label, then a separator
+	// BharatCode Studio: the models of `leadingModels` first, under their label, then a separator
 	const leading = options.presentation.leadingModels;
 	const firstModels = leading ? sortedModels.filter(leading.matches) : [];
 	if (leading && firstModels.length > 0) {

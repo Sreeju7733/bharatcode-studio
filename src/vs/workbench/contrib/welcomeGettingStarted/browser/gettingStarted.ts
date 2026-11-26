@@ -1243,7 +1243,7 @@ export class GettingStartedPage extends EditorPane {
 			this.updateCategoryProgress();
 		});
 
-		gettingStartedList.setEntries([]); // Kodia: hide walkthroughs section on welcome page
+		gettingStartedList.setEntries([]); // BharatCode Studio: hide walkthroughs section on welcome page
 
 		return gettingStartedList;
 	}

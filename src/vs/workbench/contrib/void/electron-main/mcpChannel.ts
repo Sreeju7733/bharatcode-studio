@@ -9,7 +9,7 @@
 
 import { IServerChannel } from '../../../../base/parts/ipc/common/ipc.js';
 import { Emitter, Event } from '../../../../base/common/event.js';
-// Kodia: the MCP SDK is imported as types only and loaded where it is used. A static import of an npm
+// BharatCode Studio: the MCP SDK is imported as types only and loaded where it is used. A static import of an npm
 // package makes the packaged app fail to start: since VS Code 1.141 the main process is one bundle whose
 // static imports resolve before the node_modules.asar lookup hook is installed.
 import type { Client } from '@modelcontextprotocol/sdk/client/index.js';
@@ -101,7 +101,7 @@ export class MCPChannel implements IServerChannel {
 				return response
 			}
 			else {
-				throw new Error(`Kodia sendLLM: command "${command}" not recognized.`)
+				throw new Error(`BharatCode Studio sendLLM: command "${command}" not recognized.`)
 			}
 		}
 		catch (e) {

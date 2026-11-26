@@ -151,7 +151,7 @@ export class RefreshModelService extends Disposable implements IRefreshModelServ
 	}
 
 
-	// Kodia: each refresh of a provider has a number. Only the answer to the latest one counts and polls again: an older
+	// BharatCode Studio: each refresh of a provider has a number. Only the answer to the latest one counts and polls again: an older
 	// one (a poll still in flight when the user clicks, or when MLX starts) neither overwrites newer models nor starts a
 	// second polling loop.
 	private readonly _generationOfProvider: Record<RefreshableProviderName, number> = { ollama: 0, vLLM: 0, lmStudio: 0, mlx: 0 }
@@ -204,7 +204,7 @@ export class RefreshModelService extends Disposable implements IRefreshModelServ
 					providerName,
 					normalizedModelNames,
 					{ enableProviderOnSuccess: options.enableProviderOnSuccess, hideRefresh: options.doNotFire },
-					// the context window the server gives a model, over the one Kodia guesses from its name
+					// the context window the server gives a model, over the one BharatCode Studio guesses from its name
 					providerName === 'ollama' ? undefined : contextWindowsOfListedModels(providerName, models),
 				)
 

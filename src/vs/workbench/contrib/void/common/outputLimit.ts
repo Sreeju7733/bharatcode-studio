@@ -15,7 +15,7 @@ export function withOutputLimitNotice(text: string, reachedOutputLimit: boolean)
 }
 
 /**
- * mlx_lm.server stops a reply at 512 tokens unless the request names a limit, and Kodia's requests did not: a reply a
+ * mlx_lm.server stops a reply at 512 tokens unless the request names a limit, and BharatCode Studio's requests did not: a reply a
  * little long was cut. An MLX model gets room for a long reply, whatever its context allows after the prompt.
  */
 export const MLX_MIN_OUTPUT_TOKENS = 8_192;

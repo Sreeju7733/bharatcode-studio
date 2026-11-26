@@ -46,7 +46,7 @@ const problemOf = (key: (typeof modelOverrideKeys)[number], value: unknown): str
 }
 
 /**
- * The overrides in `input` (parsed JSON), or what is wrong with it. A key Kodia doesn't know is an error rather than
+ * The overrides in `input` (parsed JSON), or what is wrong with it. A key BharatCode Studio doesn't know is an error rather than
  * dropped in silence: it is most often a misspelled one.
  */
 export const parseModelOverrides = (input: unknown): { overrides: StoredModelOverrides, error?: undefined } | { error: string } => {
@@ -55,10 +55,10 @@ export const parseModelOverrides = (input: unknown): { overrides: StoredModelOve
 	const overrides: Record<string, unknown> = {}
 	for (const key of Object.keys(input)) {
 		if (!(modelOverrideKeys as readonly string[]).includes(key)) {
-			return { error: `"${key}" isn't a setting Kodia knows. The settings are: ${modelOverrideKeys.join(', ')}.` }
+			return { error: `"${key}" isn't a setting BharatCode Studio knows. The settings are: ${modelOverrideKeys.join(', ')}.` }
 		}
 		const value = input[key]
-		// an empty value means "keep Kodia's default", but for the tool format, where null means "none"
+		// an empty value means "keep BharatCode Studio's default", but for the tool format, where null means "none"
 		if (value === '' || value === undefined || (value === null && key !== 'specialToolFormat')) continue
 		const problem = problemOf(key as (typeof modelOverrideKeys)[number], value)
 		if (problem) return { error: `"${key}" ${problem}.` }

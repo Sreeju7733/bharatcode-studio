@@ -276,7 +276,7 @@ export class ChatWorkingProgressLogo extends ChatWorkingLogo {
 		super(getConfiguredProgressAnimation(configurationService, logService), quality, {
 			isMotionReduced: () => accessibilityService.isMotionReduced(),
 		});
-		// Kodia: a neutral spinner stands in for the VS Code mark, which CSS hides.
+		// BharatCode Studio: a neutral spinner stands in for the VS Code mark, which CSS hides.
 		this.domNode.classList.add('chat-working-logo-kodia');
 		append(this.domNode, $(`span.chat-working-logo-icon${ThemeIcon.asCSSSelector(Codicon.loading)}`));
 		this._register(configurationService.onDidChangeConfiguration(event => {

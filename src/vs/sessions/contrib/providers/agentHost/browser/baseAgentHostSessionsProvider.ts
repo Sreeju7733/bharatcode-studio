@@ -4360,9 +4360,9 @@ export abstract class BaseAgentHostSessionsProvider extends Disposable implement
 				label: this._formatSessionTypeLabel(agent.displayName?.trim() || agent.provider),
 				icon: this.iconForAgentProvider(agent.provider) ?? this.icon,
 			}))
-			// Kodia: agents that can run (they have models) come first, so the default session type,
+			// BharatCode Studio: agents that can run (they have models) come first, so the default session type,
 			// the first one, is never an agent still waiting for credentials while another one works.
-			// Among those, Kodia leads: its picker is the models switched on in Kodia settings.
+			// Among those, BharatCode Studio leads: its picker is the models switched on in BharatCode Studio settings.
 			.sort((a, b) => {
 				const byAuth = Number(a.authRequirement !== SessionTypeAuthRequirement.None) - Number(b.authRequirement !== SessionTypeAuthRequirement.None);
 				return byAuth !== 0 ? byAuth : Number(b.id === KODIA_AGENT_PROVIDER_ID) - Number(a.id === KODIA_AGENT_PROVIDER_ID);
@@ -5967,7 +5967,7 @@ export abstract class BaseAgentHostSessionsProvider extends Disposable implement
 		// `agent-host-<provider>` chat session type) rather than hardcoding names.
 		const resourceScheme = this._resolveSessionResourceScheme(sessionId);
 		const showAutoModel = !resourceScheme || this._chatSessionsService.supportsAutoModelForSessionType(resourceScheme);
-		// Kodia's models are the ones switched on in settings (Gemini, MLX, OpenRouter, …).
+		// BharatCode Studio's models are the ones switched on in settings (Gemini, MLX, OpenRouter, …).
 		// They are not in Copilot's featured list, so the grouped picker would hide every one
 		// of them behind the collapsed "Other Models" row.
 		const isKodia = this._agentProviderForSession(sessionId) === KODIA_AGENT_PROVIDER_ID;

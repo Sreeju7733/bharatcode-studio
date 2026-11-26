@@ -343,8 +343,8 @@ export class ModelPickerWidget extends Disposable {
 	}
 
 	private _requiresSetup(): boolean {
-		// Kodia: no Copilot to sign in to; the models come from Kodia's settings (see kodiaModelPicker.ts)
-		if (isKodiaProduct(this._productService)) {
+		// BharatCode Studio: no Copilot to sign in to; the models come from BharatCode Studio's settings (see kodiaModelPicker.ts)
+		if (isBharatCode StudioProduct(this._productService)) {
 			return false;
 		}
 		return modelPickerRequiresSetup({
@@ -589,8 +589,8 @@ export class ModelPickerWidget extends Disposable {
 		const presentation = this._delegate.getPresentationOptions();
 		const manifest = this._languageModelsService.getModelsControlManifest();
 		const controlModelsForTier: IStringDictionary<IModelControlEntry> = getModelPickerControlModels(manifest, this._entitlementService.entitlement, models);
-		// Kodia: always offered, it opens Kodia's settings (see kodiaModelPicker.ts)
-		const canShowManageModelsAction = presentation.showManageModelsAction && (isKodiaProduct(this._productService) || shouldShowManageModelsAction(this._entitlementService));
+		// BharatCode Studio: always offered, it opens BharatCode Studio's settings (see kodiaModelPicker.ts)
+		const canShowManageModelsAction = presentation.showManageModelsAction && (isBharatCode StudioProduct(this._productService) || shouldShowManageModelsAction(this._entitlementService));
 		const manageModelsAction = canShowManageModelsAction ? createManageModelsAction(this._commandService) : undefined;
 		const logModelPickerInteraction = (interaction: ChatModelPickerInteraction) => {
 			this._telemetryService.publicLog2<ChatModelPickerInteractionEvent, ChatModelPickerInteractionClassification>('chat.modelPickerInteraction', { interaction });
@@ -687,10 +687,10 @@ export class ModelPickerWidget extends Disposable {
 				restrictedMode: this.isRestrictedMode(),
 				setupRequired: this.isSetupRequired(),
 				showManageModelsInSetupRequired: this._configurationService.getValue<boolean>(AgentHostAllowSignedOutWhenUsableSettingId) === true,
-				// Kodia: the flat picker of the Kodia agent ends with "Manage Models..." (see kodiaModelPicker.ts)
-				showManageModelsInFlatList: isKodiaProduct(this._productService),
-				// Kodia: OpenRouter's free models first, apart from the others
-				leadingModels: isKodiaProduct(this._productService) ? { label: localize('chat.modelPicker.kodiaFreeModels', "Free"), matches: isKodiaFreeModel } : undefined,
+				// BharatCode Studio: the flat picker of the BharatCode Studio agent ends with "Manage Models..." (see kodiaModelPicker.ts)
+				showManageModelsInFlatList: isBharatCode StudioProduct(this._productService),
+				// BharatCode Studio: OpenRouter's free models first, apart from the others
+				leadingModels: isBharatCode StudioProduct(this._productService) ? { label: localize('chat.modelPicker.kodiaFreeModels', "Free"), matches: isBharatCode StudioFreeModel } : undefined,
 				isUBB: !!this._entitlementService.quotas.usageBasedBilling,
 			},
 			actions: {

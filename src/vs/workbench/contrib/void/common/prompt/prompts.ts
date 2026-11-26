@@ -31,10 +31,10 @@ export const MAX_CHILDREN_URIs_PAGE = 500
 // terminal tool info
 export const MAX_TERMINAL_CHARS = 100_000
 export const MAX_TERMINAL_INACTIVE_TIME = 8 // seconds
-// shared with the Kodia agent of the Agents window, whose persistent terminals wait as long
+// shared with the BharatCode Studio agent of the Agents window, whose persistent terminals wait as long
 export { MAX_TERMINAL_BG_COMMAND_TIME }
 
-// project memory tool info, shared with the Kodia agent of the Agents window
+// project memory tool info, shared with the BharatCode Studio agent of the Agents window
 export { MAX_PROJECT_MEMORY_TOKENS }
 
 
@@ -43,15 +43,15 @@ export const MAX_PREFIX_SUFFIX_CHARS = 20_000
 
 
 // --- summarizing a thread that outgrew the context window (ContextSummaryEntry) ---
-// the prompts are shared with the Kodia agent of the Agents window
+// the prompts are shared with the BharatCode Studio agent of the Agents window
 export { summarizedThreadMessage, summarizeThread_systemMessage, summarizeThread_userMessage }
 
 
-// The rules files and the skills prompt, shared with the Kodia agent of the Agents window
+// The rules files and the skills prompt, shared with the BharatCode Studio agent of the Agents window
 export { joinProjectRules, PROJECT_RULES_FILE_NAMES, skillsPrompt as chat_skills }
 
 
-// the search/replace blocks' format is shared with the Kodia agent of the Agents window
+// the search/replace blocks' format is shared with the BharatCode Studio agent of the Agents window
 export { DIVIDER, FINAL, ORIGINAL }
 
 
@@ -155,7 +155,7 @@ export type SnakeCaseKeys<T extends Record<string, any>> = {
 
 
 
-// A tool Kodia's chat and the Kodia agent of the Agents window both have: defined once in the shared catalog (its
+// A tool BharatCode Studio's chat and the BharatCode Studio agent of the Agents window both have: defined once in the shared catalog (its
 // `sharedTools`, its `editorTools`, which the agent has while an editor window is open, and its `persistentTerminalTools`).
 // The chat tells the model every parameter as a string, so only the descriptions are taken; `overrides` keeps the chat's
 // own text where the shared one can't name the chat's editor tools.
@@ -265,7 +265,7 @@ const toolsNotOfferedToModels: ReadonlySet<BuiltinToolName> = new Set(['read_pro
 // tools that change nothing but still need approval: Gather mode offers them too
 const readOnlyToolsNeedingApproval: ReadonlySet<BuiltinToolName> = new Set(['fetch_url'])
 
-// explicitTools: Kodia Agents Window — an agent that runs its own tools offers exactly those, instead of the chat mode's
+// explicitTools: BharatCode Studio Agents Window — an agent that runs its own tools offers exactly those, instead of the chat mode's
 export const availableTools = (chatMode: ChatMode | null, mcpTools: InternalToolInfo[] | undefined, explicitTools?: InternalToolInfo[]) => {
 	if (explicitTools) return explicitTools
 
@@ -370,7 +370,7 @@ ${workspaceFolders.join('\n') || 'NO FOLDERS OPEN'}
 
 	if (mode === 'agent' || mode === 'gather') {
 		details.push(`Use tools when they help with the user's request; a greeting, or a question you can answer directly, doesn't need them.`)
-		details.push(`You don't need to ask before using a tool: Kodia asks the user to approve file edits and terminal commands when their settings require it.`)
+		details.push(`You don't need to ask before using a tool: BharatCode Studio asks the user to approve file edits and terminal commands when their settings require it.`)
 		details.push(includeXMLToolDefinitions
 			? 'Make one tool call per response: only the first one is read.' // the XML tool parser reads a single call per response
 			: `When tool calls are independent of each other (for example, reading or searching several files), make them all in the same response — they run in parallel. Make edits and terminal commands one at a time, and wait for a result before making a call that depends on it.`)
@@ -391,7 +391,7 @@ ${workspaceFolders.join('\n') || 'NO FOLDERS OPEN'}
 		details.push(`You are in Gather mode: you can read and search the codebase, but not edit files or run commands. Gather the files and context the answer needs.`)
 	}
 
-	details.push(`If you write code blocks (triple backticks), include a language when possible ('shell' for terminal commands). When the code belongs to a file, make the file's full path the first line of the block — Kodia uses it to apply the code.`)
+	details.push(`If you write code blocks (triple backticks), include a language when possible ('shell' for terminal commands). When the code belongs to a file, make the file's full path the first line of the block — BharatCode Studio uses it to apply the code.`)
 
 	if (mode === 'gather' || mode === 'normal') {
 

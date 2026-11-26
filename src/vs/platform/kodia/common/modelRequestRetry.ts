@@ -3,7 +3,7 @@
  *  Licensed under the Apache License, Version 2.0. See LICENSE.txt for more information.
  *--------------------------------------------------------------------------------------*/
 
-// When a request to the model fails, Kodia's chat and the Kodia agent of the Agents window both send it again before
+// When a request to the model fails, Kodia's chat and the BharatCode Studio agent of the Agents window both send it again before
 // they give up, by the rules below: a local server that is still loading its model, or a provider that drops a
 // connection, answers the second time.
 

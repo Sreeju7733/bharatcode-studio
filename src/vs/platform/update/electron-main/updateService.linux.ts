@@ -57,7 +57,7 @@ export class LinuxUpdateService extends AbstractUpdateService {
 					return;
 				}
 
-				// Kodia: the feed always describes the latest release, see kodiaUpdate.ts
+				// BharatCode Studio: the feed always describes the latest release, see kodiaUpdate.ts
 				if (!isNewerUpdate(update, this.getBaselineUpdate())) {
 					this.setState(State.Idle(UpdateType.Archive, undefined, explicit || undefined));
 				} else {

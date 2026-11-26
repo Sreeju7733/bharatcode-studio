@@ -8,7 +8,7 @@ import { RawToolCallObj, RawToolParamsObj } from './sendLLMMessageTypes.js';
 import { ToolName, ToolParamName } from './toolsServiceTypes.js';
 import { ModelSelection, OverridesOfModel } from './voidSettingsTypes.js';
 
-// Kodia asks a model for a tool call as XML tags. Small local models often write it as a JSON object instead, in a
+// BharatCode Studio asks a model for a tool call as XML tags. Small local models often write it as a JSON object instead, in a
 // code block or on its own: {"name": "read_file", "arguments": {"uri": "src/a.ts"}}. It is read as the call it is,
 // when the name is one of the tools offered. Only the last such object counts, and it is taken out of the text.
 

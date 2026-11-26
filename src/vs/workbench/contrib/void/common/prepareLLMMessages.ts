@@ -16,7 +16,7 @@ import { ToolName } from './toolsServiceTypes.js';
 import { CLEARED_TOOL_RESULT } from '../../../../platform/kodia/common/threadSummary.js';
 
 export const EMPTY_MESSAGE = '(empty message)'
-// shared with the Kodia agent of the Agents window
+// shared with the BharatCode Studio agent of the Agents window
 export { CLEARED_TOOL_RESULT }
 
 

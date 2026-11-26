@@ -32,7 +32,7 @@ export interface IBuildModelPickerItemsOptions {
 		readonly setupRequired: boolean;
 		readonly showManageModelsInSetupRequired: boolean;
 		readonly isUBB: boolean;
-		/** Kodia: end the flat list (and the empty state) with "Manage Models...", which opens Kodia's settings. */
+		/** BharatCode Studio: end the flat list (and the empty state) with "Manage Models...", which opens BharatCode Studio's settings. */
 		readonly showManageModelsInFlatList?: boolean;
 		/** Kodia: models the flat list puts first, under their own label, apart from the others (OpenRouter's free models). */
 		readonly leadingModels?: { readonly label: string; readonly matches: (model: ILanguageModelChatMetadataAndIdentifier) => boolean };

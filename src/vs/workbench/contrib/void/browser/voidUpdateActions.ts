@@ -22,7 +22,7 @@ import { KODIA_RELEASES_URL, KODIA_REPO_URL } from '../common/kodiaLinks.js';
 
 
 const notifyUpdate = (res: VoidCheckUpdateRespose & { message: string }, notifService: INotificationService, updateService: IUpdateService): INotificationHandle => {
-	const message = res?.message || `This is a very old version of Kodia, please download the latest version! [Kodia Editor](${KODIA_RELEASES_URL})!`
+	const message = res?.message || `This is a very old version of BharatCode Studio, please download the latest version! [BharatCode Studio Editor](${KODIA_RELEASES_URL})!`
 
 	let actions: INotificationActions | undefined
 
@@ -86,7 +86,7 @@ const notifyUpdate = (res: VoidCheckUpdateRespose & { message: string }, notifSe
 		primary.push({
 			id: 'void.updater.site',
 			enabled: true,
-			label: `Kodia Site`,
+			label: `BharatCode Studio Site`,
 			tooltip: '',
 			class: undefined,
 			run: () => {
@@ -128,7 +128,7 @@ const notifyUpdate = (res: VoidCheckUpdateRespose & { message: string }, notifSe
 	// })
 }
 const notifyErrChecking = (notifService: INotificationService): INotificationHandle => {
-	const message = `Kodia Error: There was an error checking for updates. If this persists, please get in touch or reinstall Kodia [here](${KODIA_RELEASES_URL})!`
+	const message = `BharatCode Studio Error: There was an error checking for updates. If this persists, please get in touch or reinstall BharatCode Studio [here](${KODIA_RELEASES_URL})!`
 	const notifController = notifService.notify({
 		severity: Severity.Info,
 		message: message,
@@ -148,21 +148,21 @@ const performVoidCheck = async (
 
 	const metricsTag = explicit ? 'Manual' : 'Auto'
 
-	metricsService.capture(`Kodia Update ${metricsTag}: Checking...`, {})
+	metricsService.capture(`BharatCode Studio Update ${metricsTag}: Checking...`, {})
 	const res = await voidUpdateService.check(explicit)
 	if (!res) {
 		const notifController = notifyErrChecking(notifService);
-		metricsService.capture(`Kodia Update ${metricsTag}: Error`, { res })
+		metricsService.capture(`BharatCode Studio Update ${metricsTag}: Error`, { res })
 		return notifController
 	}
 	else {
 		if (res.message) {
 			const notifController = notifyUpdate(res, notifService, updateService)
-			metricsService.capture(`Kodia Update ${metricsTag}: Yes`, { res })
+			metricsService.capture(`BharatCode Studio Update ${metricsTag}: Yes`, { res })
 			return notifController
 		}
 		else {
-			metricsService.capture(`Kodia Update ${metricsTag}: No`, { res })
+			metricsService.capture(`BharatCode Studio Update ${metricsTag}: No`, { res })
 			return null
 		}
 	}

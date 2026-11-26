@@ -1231,7 +1231,7 @@ export const VoidCustomDropdownBox = <T extends NonNullable<any>>({
 	getOptionDropdownDetail?: (option: T) => string;
 	getOptionDisplayName: (option: T) => string;
 	getOptionsEqual: (a: T, b: T) => boolean;
-	hasSeparatorBefore?: (option: T, previousOption: T) => boolean; // Kodia: a line between two groups of options
+	hasSeparatorBefore?: (option: T, previousOption: T) => boolean; // BharatCode Studio: a line between two groups of options
 	className?: string;
 	arrowTouchesText?: boolean;
 	matchInputWidth?: boolean;

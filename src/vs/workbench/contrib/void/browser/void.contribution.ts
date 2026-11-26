@@ -81,10 +81,10 @@ import '../common/refreshModelService.js'
 import '../common/mlxService.js'
 import './mlxWorkbenchContrib.js'
 
-// the models providers' APIs list that Kodia's catalog doesn't have (OpenRouter's free models), detected daily
+// the models providers' APIs list that BharatCode Studio's catalog doesn't have (OpenRouter's free models), detected daily
 import './providerModelsContrib.js'
 
-// Agents Window: the Kodia agent runs every model shown in Kodia's model dropdown
+// Agents Window: the BharatCode Studio agent runs every model shown in BharatCode Studio's model dropdown
 import './kodiaAgentHostLmHandler.js'
 
 // metrics

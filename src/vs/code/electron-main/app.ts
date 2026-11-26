@@ -1359,13 +1359,13 @@ export class CodeApplication extends Disposable {
 			services.set(ITelemetryService, NullTelemetryService);
 		}
 
-		// Kodia main process services (required for services with a channel for comm between browser and electron-main (node))
+		// BharatCode Studio main process services (required for services with a channel for comm between browser and electron-main (node))
 		services.set(IMetricsService, new SyncDescriptor(MetricsMainService, undefined, false));
 		services.set(IVoidUpdateService, new SyncDescriptor(VoidMainUpdateService, undefined, false));
 		services.set(IVoidSCMService, new SyncDescriptor(VoidSCMService, undefined, false));
 		services.set(IMlxMainService, new SyncDescriptor(MlxMainService, undefined, false));
-		services.set(IKodiaWebFetchService, new SyncDescriptor(KodiaWebFetchMainService, undefined, false));
-		services.set(IKodiaWindowsService, new SyncDescriptor(KodiaWindowsMainService, undefined, false));
+		services.set(IBharatCode StudioWebFetchService, new SyncDescriptor(BharatCode StudioWebFetchMainService, undefined, false));
+		services.set(IBharatCode StudioWindowsService, new SyncDescriptor(BharatCode StudioWindowsMainService, undefined, false));
 
 		// Default Extensions Profile Init
 		services.set(IExtensionsProfileScannerService, new SyncDescriptor(ExtensionsProfileScannerService, undefined, true));
@@ -1541,7 +1541,7 @@ export class CodeApplication extends Disposable {
 		mainProcessElectronServer.registerChannel('logger', loggerChannel);
 		sharedProcessClient.then(client => client.registerChannel('logger', loggerChannel));
 
-		// Kodia - use loggerChannel as reference
+		// BharatCode Studio - use loggerChannel as reference
 		const metricsChannel = ProxyChannel.fromService(accessor.get(IMetricsService), disposables);
 		mainProcessElectronServer.registerChannel('void-channel-metrics', metricsChannel);
 
@@ -1551,22 +1551,22 @@ export class CodeApplication extends Disposable {
 		const sendLLMMessageChannel = new LLMMessageChannel(accessor.get(IMetricsService));
 		mainProcessElectronServer.registerChannel('void-channel-llmMessage', sendLLMMessageChannel);
 
-		// Kodia added this
+		// BharatCode Studio added this
 		const voidSCMChannel = ProxyChannel.fromService(accessor.get(IVoidSCMService), disposables);
 		mainProcessElectronServer.registerChannel('void-channel-scm', voidSCMChannel);
 
 		const mlxChannel = ProxyChannel.fromService(accessor.get(IMlxMainService), disposables);
 		mainProcessElectronServer.registerChannel('void-channel-mlx', mlxChannel);
 
-		// Kodia: the fetch_url tool
-		const webFetchChannel = ProxyChannel.fromService(accessor.get(IKodiaWebFetchService), disposables);
+		// BharatCode Studio: the fetch_url tool
+		const webFetchChannel = ProxyChannel.fromService(accessor.get(IBharatCode StudioWebFetchService), disposables);
 		mainProcessElectronServer.registerChannel('void-channel-webFetch', webFetchChannel);
 
-		// Kodia: the Agents Window opens Kodia's settings in an editor window
-		const kodiaWindowsChannel = ProxyChannel.fromService(accessor.get(IKodiaWindowsService), disposables);
+		// BharatCode Studio: the Agents Window opens BharatCode Studio's settings in an editor window
+		const kodiaWindowsChannel = ProxyChannel.fromService(accessor.get(IBharatCode StudioWindowsService), disposables);
 		mainProcessElectronServer.registerChannel(KODIA_WINDOWS_CHANNEL, kodiaWindowsChannel);
 
-		// Kodia added this
+		// BharatCode Studio added this
 		const mcpChannel = new MCPChannel();
 		mainProcessElectronServer.registerChannel('void-channel-mcp', mcpChannel);
 

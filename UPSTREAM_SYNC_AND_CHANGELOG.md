@@ -141,3 +141,42 @@ After running `git merge upstream/master`:
 - [ ] Check `product.json` has `BharatCode Studio` name and bundle IDs.
 - [ ] Run `npm run buildreact` to re-bundle the React UI (`src/vs/workbench/contrib/void/browser/react/dist/`).
 - [ ] Run `npm run compile` to verify TypeScript typechecking passes.
+
+
+---
+
+# 12. Deep Technical Reference: Every Modified Path, Upstream Diff & Rationale
+
+This section provides an exhaustive line-level roadmap of every architectural change made to transform upstream Kodia / VS Code into **BharatCode Studio**, enabling seamless upstream tracking, rebasing, and cross-platform verification (Windows, macOS, Linux).
+
+### 1. Product Identity, Mutexes & Binary Naming
+* **File**: `product.json`
+  * **Diff**: `nameShort`: `"BharatCode Studio"`, `nameLong`: `"BharatCode Studio"`, `applicationName`: `"bharatcode-studio"`, `dataFolderName`: `".bharatcode-studio"`, `win32AppUserModelId`: `"BharatCodeStudio.BharatCodeStudio"`, `win32MutexName`: `"bharatcodestudio"`, `darwinBundleIdentifier`: `"ai.bharatcode.studio"`. Documentation, telemetry and repository URLs redirected to `https://github.com/Sreeju7733/bharatcode-studio`.
+  * **Why**: Prevents collisions with VS Code, VSCodium, and upstream Kodia. Ensures Windows Task Manager, macOS Activity Monitor, and Linux `ps` identify the application solely as `BharatCode Studio`.
+* **File**: `package.json`
+  * **Diff**: `"name": "BharatCode Studio"`.
+  * **Why**: Renames Electron process package identifier so system processes in OS task managers display `BharatCode Studio`.
+
+### 2. Native AI Provider Registration (`bharatcode`)
+* **File**: `src/vs/workbench/contrib/void/common/modelCapabilities.ts`
+  * **Diff**: Added `glm53ReasoningEffortCapabilities`, `bharatcodeModelOptions` (`glm-5.3-flash`, `deepseek-v4.1-flash`), and `bharatcodeSettings` inside `voidStaticModelInfos`.
+  * **Why**: Exposes native BharatCode models with correct token limits (1,000,000 context, 128k/384k output), tool formatting (`openai-style`), system message handling (`system-role`), and thinking tag extraction (`<think>...</think>`).
+* **File**: `src/vs/workbench/contrib/void/common/voidSettingsTypes.ts`
+  * **Diff**: Added `bharatcode` to `VoidProviderName`, `defaultProviderSettings` (`apiKey: ""`), `defaultModelsOfProvider` (`["glm-5.3-flash", "deepseek-v4.1-flash"]`), and UI title resolver (`title: "BharatCode"`).
+  * **Why**: Registers BharatCode as a first-class citizen alongside Anthropic and OpenAI across the workbench UI and settings state.
+* **File**: `src/vs/workbench/contrib/void/electron-main/llmMessage/sendLLMMessage.impl.ts`
+  * **Diff**: Added `bharatcode` case pointing to baseURL `https://bharatcode.ai/api/model/v1` with OpenAI compatibility format.
+  * **Why**: Routes all LLM requests directly to the official BharatCode API backend.
+
+### 3. Onboarding & Model Visibility Flow (No-Lockout Fix)
+* **File**: `src/vs/workbench/contrib/void/common/voidSettingsService.ts`
+  * **Diff**: In state hydration and provider validation (`_didFillInProviderSettings`), `bharatcode` models default to visible (`isHidden: false`) and toggle switches are enabled immediately without requiring pre-validation lockouts.
+  * **Why**: In upstream Void/Kodia, uninitialized providers disable toggle switches with `"Add <Provider> to enable"`. For BharatCode Studio, BharatCode is the primary built-in engine, so models must be enabled and active from first boot.
+
+### 4. Cross-Platform Automated Builder & Distribution
+* **File**: `bharatcode-studio-builder/.github/workflows/stable*.yml`
+  * **Diff**: `APP_NAME`: `BharatCode Studio`, repository pointers updated to `Sreeju7733/bharatcode-studio`.
+  * **Why**: Builds official `.exe` (Windows User/System Setup & MSI), `.dmg`/`.zip` (macOS x64 & Apple Silicon), `.deb`/`.rpm`/`.tar.gz` (Linux x64, arm64, armhf), and CLI tunnels.
+* **File**: `packaging/` (Homebrew Tap, AUR, Scoop, WinGet, APT/RPM)
+  * **Diff**: Fully unified in `bharatcode-studio/packaging/` pointing to `Sreeju7733/bharatcode-studio/releases`.
+  * **Why**: Centralizes all OS distribution channels into the core repository for single-commit maintenance.

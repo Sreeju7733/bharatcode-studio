@@ -150,6 +150,6 @@ export const extractCodeFromFIM = ({ text, recentlyAddedTextLen, midTag, }: { te
 
 
 
-// the search/replace blocks' parser is shared with the Kodia agent of the Agents window
+// the search/replace blocks' parser is shared with the BharatCode Studio agent of the Agents window
 export { endsWithAnyPrefixOf, extractSearchReplaceBlocks } from '../../../../../platform/kodia/common/searchReplaceBlocks.js'
 export type { ExtractedSearchReplaceBlock } from '../../../../../platform/kodia/common/searchReplaceBlocks.js'

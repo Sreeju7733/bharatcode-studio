@@ -37,7 +37,7 @@ export const sendLLMMessage = async ({
 
 	const { providerName, modelName } = modelSelection
 
-	// Kodia: the capabilities of the models detected through a provider's API come with the settings
+	// BharatCode Studio: the capabilities of the models detected through a provider's API come with the settings
 	setDetectedModelOptions(settingsOfProvider)
 
 	// only captures number of messages and message "shape", no actual code, instructions, prompts, etc
@@ -86,7 +86,7 @@ export const sendLLMMessage = async ({
 
 		// handle failed to fetch errors, which give 0 information by design
 		if (errorMessage === 'TypeError: fetch failed')
-			errorMessage = `Failed to fetch from ${displayInfoOfProviderName(providerName).title}. This likely means you specified the wrong endpoint in Kodia's Settings, or your local model provider like Ollama is powered off.`
+			errorMessage = `Failed to fetch from ${displayInfoOfProviderName(providerName).title}. This likely means you specified the wrong endpoint in BharatCode Studio's Settings, or your local model provider like Ollama is powered off.`
 
 		captureLLMEvent(`${loggingName} - Error`, { error: errorMessage })
 		onError_({ message: errorMessage, fullError })

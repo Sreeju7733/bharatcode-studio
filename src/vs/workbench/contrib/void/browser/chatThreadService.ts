@@ -437,11 +437,11 @@ class ChatThreadService extends Disposable implements IChatThreadService {
 			// set streamState
 			const messages = newState.allThreads[threadId]?.messages
 			const lastMessage = messages && messages[messages.length - 1]
-			// if awaiting user but stream state doesn't indicate it (happens if restart Kodia)
+			// if awaiting user but stream state doesn't indicate it (happens if restart BharatCode Studio)
 			if (lastMessage && lastMessage.role === 'tool' && lastMessage.type === 'tool_request')
 				this._setStreamState(threadId, { isRunning: 'awaiting_user', })
 
-			// if running now but stream state doesn't indicate it (happens if restart Kodia), cancel those tools
+			// if running now but stream state doesn't indicate it (happens if restart BharatCode Studio), cancel those tools
 			if (lastMessage && lastMessage.role === 'tool' && lastMessage.type === 'running_now') {
 				this._rejectRunningTools(threadId)
 			}
