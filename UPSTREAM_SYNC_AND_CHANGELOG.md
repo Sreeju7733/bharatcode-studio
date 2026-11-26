@@ -207,3 +207,8 @@ This section provides an exhaustive line-level roadmap of every architectural ch
   * **Issue**: A toast notification popup appeared stating `"A new version of Kodia is available! Please reinstall (auto-updates are disabled on this OS)..."`.
   * **Root Cause**: The electron-main updater (`voidUpdateMainService.ts` / `mainImpl.js`) was polling `jcommaret/kodia/releases/latest`. Because the local version differed from upstream Kodia tag conventions, it falsely triggered an update notification with the old brand name.
   * **Fix**: Updated release repo endpoint from `jcommaret/kodia` to `Sreeju7733/bharatcode-studio` across `kodiaLinks.ts` and `mainImpl.js`, and updated notification templates to `"BharatCode Studio"`.
+
+* **Full Brand Icon & Menu White-Labeling (Menu Bar Icon & Welcome Cube)**:
+  * Replaced upstream transparent wireframe cube (`void_cube_noshadow.png`) with the official **BharatCode Studio** emblem.
+  * Generated and updated `src/vs/workbench/browser/media/code-icon.svg` using the official BharatCode Studio emblem to replace the top-left window titlebar / menubar icon.
+  * Replaced all occurrences of `"Kodia's Settings"` with `"BharatCode Studio's Settings"` across localization and metadata catalogs.
