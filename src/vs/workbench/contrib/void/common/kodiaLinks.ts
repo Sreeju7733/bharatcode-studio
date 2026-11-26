@@ -5,7 +5,7 @@
 
 // Kodia's GitHub repository: source, issues, and the releases the update check and the
 // remote server downloads use. Release tags are "<VS Code version>-<BharatCode Studio version>".
-export const KODIA_REPO = 'BharatCode-ai/bharatcode-studio';
+export const KODIA_REPO = 'Sreeju7733/bharatcode-studio';
 export const KODIA_REPO_URL = `https://github.com/${KODIA_REPO}`;
 export const KODIA_RELEASES_URL = `${KODIA_REPO_URL}/releases/latest`;
 export const KODIA_ISSUES_URL = `${KODIA_REPO_URL}/issues`;

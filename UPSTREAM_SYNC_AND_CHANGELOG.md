@@ -202,3 +202,8 @@ This section provides an exhaustive line-level roadmap of every architectural ch
 * **White-Labeling Button & Final Step Labels**:
   * Replaced onboarding completion button text `"Enter Kodia"` with `"Enter BharatCode Studio"`.
   * Replaced all remaining string templates (`"comes packaged with BharatCode Studio"`, `"BharatCode Studio knows"`, `"BharatCode Studio treats"`, etc.) across workbench UI.
+
+* **Update Service & GitHub Release Checker White-Labeling**:
+  * **Issue**: A toast notification popup appeared stating `"A new version of Kodia is available! Please reinstall (auto-updates are disabled on this OS)..."`.
+  * **Root Cause**: The electron-main updater (`voidUpdateMainService.ts` / `mainImpl.js`) was polling `jcommaret/kodia/releases/latest`. Because the local version differed from upstream Kodia tag conventions, it falsely triggered an update notification with the old brand name.
+  * **Fix**: Updated release repo endpoint from `jcommaret/kodia` to `Sreeju7733/bharatcode-studio` across `kodiaLinks.ts` and `mainImpl.js`, and updated notification templates to `"BharatCode Studio"`.
