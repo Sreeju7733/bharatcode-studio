@@ -12,7 +12,7 @@ import { ProviderName } from './voidSettingsTypes.js';
 export type DetectedModel = { modelName: string; capabilities?: Partial<VoidStaticModelInfo> };
 
 // the providers whose model list BharatCode Studio reads with the user's API key (OpenRouter's is public, see openRouterModels.ts)
-export const listableProviderNames = ['anthropic', 'openAI', 'gemini', 'mistral', 'xAI', 'groq', 'deepseek'] as const satisfies ProviderName[];
+export const listableProviderNames = ['bharatcode', 'anthropic', 'openAI', 'gemini', 'mistral', 'xAI', 'groq', 'deepseek'] as const satisfies ProviderName[];
 export type ListableProviderName = typeof listableProviderNames[number];
 
 // the fields BharatCode Studio reads, from each provider's API reference

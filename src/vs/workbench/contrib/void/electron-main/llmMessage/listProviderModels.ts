@@ -29,6 +29,8 @@ const bearer = (apiKey: string) => ({ Authorization: `Bearer ${apiKey}` });
 // chat models BharatCode Studio's catalog doesn't have). Throws when the provider can't be reached or refuses the key.
 export const listProviderModels = async (providerName: ListableProviderName, apiKey: string): Promise<unknown[]> => {
 	switch (providerName) {
+		case 'bharatcode':
+			return arrayOf((await getJson('https://bharatcode.ai/api/model/v1/models', bearer(apiKey))).data);
 		case 'anthropic': {
 			// https://platform.claude.com/docs/en/api/models/list
 			const models: Model[] = [];
