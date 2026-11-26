@@ -1341,6 +1341,15 @@ const geminiSettings: VoidStaticProviderInfo = {
 
 
 // ---------------- BHARATCODE API ----------------
+// GLM 5.3: thinking cannot be disabled; official efforts are low / high / max (default max).
+const glm53ReasoningEffortCapabilities = {
+	supportsReasoning: true as const,
+	canIOReasoning: true,
+	canTurnOffReasoning: false,
+	reasoningSlider: { type: 'effort_slider' as const, values: ['low', 'high', 'max'], default: 'max' },
+	openSourceThinkTags: ['<think>', '</think>'] as [string, string],
+}
+
 const bharatcodeModelOptions = {
 	'glm-5.3-flash': {
 		contextWindow: 1_000_000,
@@ -1450,16 +1459,6 @@ const mistralReasoningEffortCapabilities = {
 const mistralLarge4ReasoningEffortCapabilities = {
 	...mistralReasoningEffortCapabilities,
 	reasoningSlider: { type: 'effort_slider' as const, values: ['none', 'high'], default: 'high' },
-}
-
-// GLM 5.3: thinking cannot be disabled; official efforts are low / high / max (default max).
-// https://z.ai/blog/glm-5.3 — Mistral hosts it unmodified: https://docs.mistral.ai/models/zai-glm-5-3
-const glm53ReasoningEffortCapabilities = {
-	supportsReasoning: true as const,
-	canIOReasoning: true,
-	canTurnOffReasoning: false,
-	reasoningSlider: { type: 'effort_slider' as const, values: ['low', 'high', 'max'], default: 'max' },
-	openSourceThinkTags: ['<think>', '</think>'] as [string, string],
 }
 
 // Mistral bills prompt-cache hits at 10% of the input price, so cache_read is input / 10 (except GLM, priced by Z.ai).
