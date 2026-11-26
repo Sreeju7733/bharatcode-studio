@@ -114,6 +114,19 @@ Replaced user-facing `"Kodia"` and `"Void"` strings in:
 | **`packaging/winget/BharatCode.BharatCodeStudio.yaml`** | Microsoft Winget singleton manifest for Windows User Setup (`.exe`). |
 | **`packaging/scoop/bharatcode-studio.json`** | Windows Scoop package definition with auto-update manifest. |
 | **`packaging/linux-repo/README.md`** | APT (`.deb`) and DNF (`.rpm`) signed package repository setup guide. |
+| **`packaging/setup_all_distribution_repos.sh`** | Automated helper to stage all distribution buckets and tap repositories. |
+
+---
+
+### Group G: Application Icon & Brand Asset Suite
+
+| Platform / Format | File Path | Specifications |
+| :--- | :--- | :--- |
+| **Linux (HiColor PNG)** | `resources/linux/code.png` | 1024x1024 RGBA. Official obsidian squircle with glowing `< / >` cyber-bracket and tricolor accents. |
+| **macOS (Apple ICNS)** | `resources/darwin/code.icns` | Multi-resolution Apple icon bundle (16x16 to 1024x1024 Retina). |
+| **Windows (ICO)** | `resources/win32/code.ico` | Multi-frame Windows icon (16, 24, 32, 48, 64, 128, 256 px). |
+| **Windows Tiles & Installer** | `resources/win32/code_150x150.png`, `code_70x70.png`, `logo_cube_noshadow.png` | Windows Start Menu medium/small tiles and Inno-Setup assets. |
+| **Web & Remote Server** | `resources/server/code-512.png`, `code-192.png`, `favicon.ico` | VS Code Web and remote browser server icons. |
 
 ---
 
