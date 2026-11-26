@@ -1352,9 +1352,9 @@ const glm53ReasoningEffortCapabilities = {
 
 const bharatcodeModelOptions = {
 	'glm-5.3-flash': {
-		contextWindow: 1_000_000,
-		reservedOutputTokenSpace: 128_000,
-		cost: { input: 1.00, cache_read: 0.10, output: 2.00 },
+		contextWindow: 262_144,
+		reservedOutputTokenSpace: 32_000,
+		cost: { input: 0.00, cache_read: 0.00, output: 0.00 },
 		supportsFIM: true,
 		specialToolFormat: 'openai-style',
 		downloadable: false,
@@ -1364,7 +1364,7 @@ const bharatcodeModelOptions = {
 	},
 	'deepseek-v4.1-flash': {
 		contextWindow: 1_000_000,
-		reservedOutputTokenSpace: 384_000,
+		reservedOutputTokenSpace: 32_000,
 		cost: { cache_read: 0.003, input: 0.15, output: 0.60 },
 		downloadable: false,
 		supportsFIM: true,
