@@ -194,3 +194,7 @@ This section provides an exhaustive line-level roadmap of every architectural ch
   * **Fix**: Updated toggle handler to write initial provider settings and activate the model in `models` array immediately on click.
 * **Full White-Labeling**:
   * Renamed all occurrences of "Kodia" to "BharatCode Studio" across dialogs, welcome headers, model menus, and descriptions while preserving licenses and credit notices.
+
+* **Provider Completion Indicator (`isDone`) & True State Validation**:
+  * **Issue**: The `BharatCode` provider pill was incorrectly displaying a checkmark (`✓`) even before the user entered an API key, and the "Next" button was prematurely visible.
+  * **Fix**: Cleaned provider default state (`_didFillInProviderSettings: void 0` in `WPi.bharatcode`) and restored strict validation. The checkmark (`✓`) on the provider pill now only appears **after** a valid API key is entered, and the "Next" button only unlocks once an API key is configured.
