@@ -6,7 +6,7 @@
 import React, { useEffect, useState } from 'react';
 import { useAccessor, useIsDark, useSettingsState } from '../util/services.js';
 import { KeyRound, Sparkles, SlidersHorizontal, ArrowRight, ExternalLink } from 'lucide-react';
-import { VOID_OPEN_SETTINGS_ACTION_ID } from '../../voidSettingsPane.js';
+import { VOID_OPEN_SETTINGS_ACTION_ID } from '../../../voidSettingsPane.js';
 import ErrorBoundary from '../sidebar-tsx/ErrorBoundary.js';
 
 const OVERRIDE_VALUE = false
