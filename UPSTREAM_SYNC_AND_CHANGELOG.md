@@ -79,6 +79,8 @@ git branch -d sync-upstream
 | **`src/vs/workbench/contrib/void/browser/react/src/styles.css`** | Added dark studio palette variables (`#B8FF43` neon lime accent, `#0E0F0B` dark background). |
 | **`src/vs/workbench/contrib/void/browser/react/src/void-editor-widgets-tsx/VoidCommandBar.tsx`** | Styled inline diff buttons: <br>• **Accept All**: High-contrast `#B8FF43` accent<br>• **Reject All**: Clean dark button `#1E2019`. |
 | **`src/vs/workbench/contrib/void/browser/react/src/sidebar-tsx/ChatToolResults.tsx`** | Updated tool approval action buttons to high-contrast **Accept** (`#B8FF43`) and **Reject**. |
+| **Onboarding Provider Priority & Order** | In the compiled onboarding flow (`workbench.desktop.main.js`): <br>• Default provider initialized to `'bharatcode'`.<br>• Provider buttons order pinned with `'bharatcode'` at index `0` (`D6e = ['bharatcode', ...]`).<br>• Default model selection configured as `glm-5.3-flash`.<br>• Replaced all onboarding strings (`"Welcome to Kodia"` -> `"Welcome to BharatCode Studio"`, `"Enter Kodia"` -> `"Enter BharatCode Studio"`, `"Kodia's AI features"` -> `"BharatCode Studio's AI features"`). |
+
 
 ---
 
