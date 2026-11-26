@@ -180,3 +180,17 @@ This section provides an exhaustive line-level roadmap of every architectural ch
 * **File**: `packaging/` (Homebrew Tap, AUR, Scoop, WinGet, APT/RPM)
   * **Diff**: Fully unified in `bharatcode-studio/packaging/` pointing to `Sreeju7733/bharatcode-studio/releases`.
   * **Why**: Centralizes all OS distribution channels into the core repository for single-commit maintenance.
+
+
+### 5. Runtime Fixes for Onboarding, Advanced Settings & White-Labeling (Nov 26, 2026)
+* **Model Capabilities Registration in R7r / voidStaticModelInfos**:
+  * **Issue**: Clicking "Advanced Settings" on BharatCode models threw `TypeError: Cannot destructure property modelOptions of R7r[s] as it is undefined`.
+  * **Fix**: Added `bharatcode` to runtime provider capabilities table (`R7r` in `workbench.desktop.main.js` and `voidStaticModelInfos` in `modelCapabilities.ts`), linking directly to `d7r` (`deepseek` / `glm` OpenAI-compatible definition).
+* **Onboarding "Next" Button Activation**:
+  * **Issue**: Even after entering API key, "Next" button stayed disabled with `"Add a model to continue"`.
+  * **Fix**: Pre-populated default model selection in `Lpt` with `Chat: { providerName: bharatcode, modelName: glm-5.3-flash }`, and updated onboarding validation predicate `c` so that having models under `bharatcode` immediately enables the "Next" button.
+* **Toggle Switch State Sync**:
+  * **Issue**: Toggling models before state was written did not persist.
+  * **Fix**: Updated toggle handler to write initial provider settings and activate the model in `models` array immediately on click.
+* **Full White-Labeling**:
+  * Renamed all occurrences of "Kodia" to "BharatCode Studio" across dialogs, welcome headers, model menus, and descriptions while preserving licenses and credit notices.
