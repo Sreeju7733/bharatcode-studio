@@ -78,29 +78,31 @@ While **BharatCode** is the default native provider, BharatCode Studio remains 1
 
 ---
 
-## 🚀 Install
+## 🚀 Downloads & Quick Install (v1.0.0)
 
-Pre-compiled binary releases for all major desktop platforms:
+Direct links to binary installers for all platforms from the [latest release](https://github.com/Sreeju7733/bharatcode-studio/releases/tag/v1.0.0):
 
-### 🍎 macOS (Apple Silicon & Intel)
-- Download the `.dmg` from [GitHub Releases](https://github.com/Sreeju7733/bharatcode-studio/releases).
-- Drag **BharatCode Studio.app** to your `Applications` folder.
-- *Keychain*: When macOS prompts for *"BharatCode Studio Safe Storage"*, select **Always Allow** to securely store your API keys in the macOS Keychain.
-
-### 🐧 Linux (Debian, Ubuntu, Fedora, Arch)
-- **Debian / Ubuntu**: `sudo dpkg -i bharatcode-studio-*.deb`
-- **Fedora / RHEL**: `sudo dnf install ./bharatcode-studio-*.rpm`
-- **Arch Linux (AUR)**:
-  ```bash
-  yay -S bharatcode-studio-bin
-  ```
-- **Portable**: Run directly via `.AppImage` or extract `.tar.gz`.
-
-### 🪟 Windows (x64 & ARM64)
-- Download the **User Installer** (`.exe`) or portable `.zip`.
-- Run the installer—it automatically configures environment paths and desktop shortcuts.
+| Platform | Architecture | Installer Type | Download Link | Quick Terminal Install |
+| :--- | :--- | :--- | :--- | :--- |
+| **Windows** | x64 (64-bit) | **User Setup (.exe)** | [Download .exe](https://github.com/Sreeju7733/bharatcode-studio/releases/download/v1.0.0/BharatCode-Studio-User-Setup-x64-1.0.0.exe) | `winget install BharatCode.BharatCodeStudio` |
+| **Windows** | x64 | **Portable (.zip)** | [Download .zip](https://github.com/Sreeju7733/bharatcode-studio/releases/download/v1.0.0/BharatCode-Studio-win32-x64-1.0.0.zip) | `scoop install bharatcode-studio` |
+| **Windows** | ARM64 | **User Setup (.exe)** | [Download .exe](https://github.com/Sreeju7733/bharatcode-studio/releases/download/v1.0.0/BharatCode-Studio-User-Setup-arm64-1.0.0.exe) | — |
+| **macOS** | Apple Silicon (`arm64`) | **Apple Disk Image (.dmg)** | [Download .dmg](https://github.com/Sreeju7733/bharatcode-studio/releases/download/v1.0.0/BharatCode-Studio-darwin-arm64-1.0.0.dmg) | `brew install --cask bharatcode-studio` |
+| **macOS** | Intel (`x64`) | **Apple Disk Image (.dmg)** | [Download .dmg](https://github.com/Sreeju7733/bharatcode-studio/releases/download/v1.0.0/BharatCode-Studio-darwin-x64-1.0.0.dmg) | `brew install --cask bharatcode-studio` |
+| **Linux (Debian/Ubuntu)** | x64 (`amd64`) | **Debian Package (.deb)** | [Download .deb](https://github.com/Sreeju7733/bharatcode-studio/releases/download/v1.0.0/bharatcode-studio-1.0.0-linux-amd64.deb) | `sudo dpkg -i bharatcode-studio-*.deb` |
+| **Linux (Debian/Ubuntu)** | ARM64 (`arm64`) | **Debian Package (.deb)** | [Download .deb](https://github.com/Sreeju7733/bharatcode-studio/releases/download/v1.0.0/bharatcode-studio-1.0.0-linux-arm64.deb) | `sudo dpkg -i bharatcode-studio-*.deb` |
+| **Linux (Fedora/RHEL)** | x64 | **RPM Package (.rpm)** | [Download .rpm](https://github.com/Sreeju7733/bharatcode-studio/releases/download/v1.0.0/bharatcode-studio-1.0.0-linux-x86_64.rpm) | `sudo dnf install ./bharatcode-studio-*.rpm` |
+| **Linux (Fedora/RHEL)** | ARM64 | **RPM Package (.rpm)** | [Download .rpm](https://github.com/Sreeju7733/bharatcode-studio/releases/download/v1.0.0/bharatcode-studio-1.0.0-linux-aarch64.rpm) | `sudo dnf install ./bharatcode-studio-*.rpm` |
+| **Linux (Universal)** | x64 | **AppImage** | [Download .AppImage](https://github.com/Sreeju7733/bharatcode-studio/releases/download/v1.0.0/BharatCode-Studio-1.0.0-x86_64.AppImage) | `chmod +x *.AppImage && ./*.AppImage` |
+| **Linux (Universal)** | x64 | **Tarball (.tar.gz)** | [Download .tar.gz](https://github.com/Sreeju7733/bharatcode-studio/releases/download/v1.0.0/bharatcode-studio-linux-x64-1.0.0.tar.gz) | `tar -xzf *.tar.gz && ./bharatcode-studio/bin/bharatcode-studio` |
+| **Linux (Arch / Manjaro)** | x64 / ARM64 | **AUR Package** | [AUR Package](https://aur.archlinux.org/packages/bharatcode-studio-bin) | `yay -S bharatcode-studio-bin` |
 
 ---
+
+### Platform Setup Notes
+
+- **macOS Keychain Permission**: On first launch, macOS will request access to *"BharatCode Studio Safe Storage"*. Select **Always Allow** so the editor can securely save your API keys in the macOS Keychain.
+- **Linux Sandbox**: If running the AppImage or raw tarball on minimal distributions without unprivileged user namespaces, launch with `bharatcode-studio --no-sandbox` if prompted.
 
 ## 🛠️ Build from Source
 
