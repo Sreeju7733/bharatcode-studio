@@ -1,0 +1,17 @@
+[Desktop Entry]
+Name=BharatCode Studio
+Comment=AI-powered code editor built on BharatCode
+GenericName=Text Editor
+Exec=/usr/bin/bharatcode-studio %F
+Icon=bharatcode-studio
+Type=Application
+StartupNotify=true
+StartupWMClass=bharatcode-studio
+Categories=TextEditor;Development;IDE;
+MimeType=text/plain;inode/directory;
+Actions=new-empty-window;
+
+[Desktop Action new-empty-window]
+Name=New Empty Window
+Exec=/usr/bin/bharatcode-studio --new-window %F
+Icon=bharatcode-studio

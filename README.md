@@ -95,11 +95,20 @@ Direct links to binary installers for all platforms from the [latest release](ht
 | **Linux (Fedora/RHEL)** | ARM64 | **RPM Package (.rpm)** | [Download .rpm](https://github.com/Sreeju7733/bharatcode-studio/releases/download/v1.0.0/bharatcode-studio-1.0.0-linux-aarch64.rpm) | `sudo dnf install ./bharatcode-studio-*.rpm` |
 | **Linux (Universal)** | x64 | **AppImage** | [Download .AppImage](https://github.com/Sreeju7733/bharatcode-studio/releases/download/v1.0.0/BharatCode-Studio-1.0.0-x86_64.AppImage) | `chmod +x *.AppImage && ./*.AppImage` |
 | **Linux (Universal)** | x64 | **Tarball (.tar.gz)** | [Download .tar.gz](https://github.com/Sreeju7733/bharatcode-studio/releases/download/v1.0.0/bharatcode-studio-linux-x64-1.0.0.tar.gz) | `tar -xzf *.tar.gz && ./bharatcode-studio/bin/bharatcode-studio` |
-| **Linux (Arch / Manjaro)** | x64 / ARM64 | **AUR Package** | [AUR Package](https://aur.archlinux.org/packages/bharatcode-studio-bin) | `yay -S bharatcode-studio-bin` |
+| **Linux (Arch / Manjaro)** | x64 / ARM64 | **PKGBUILD Package** | [PKGBUILD](packaging/aur) | `makepkg -si` (Direct Build) |
 
 ---
 
 ### Platform Setup Notes
+
+- **Arch Linux / Manjaro (Direct PKGBUILD Install)**:
+  Install directly via `makepkg` without waiting for AUR registration:
+  ```bash
+  git clone https://github.com/Sreeju7733/bharatcode-studio.git
+  cd bharatcode-studio/packaging/aur
+  makepkg -si
+  ```
+
 
 - **macOS Keychain Permission**: On first launch, macOS will request access to *"BharatCode Studio Safe Storage"*. Select **Always Allow** so the editor can securely save your API keys in the macOS Keychain.
 - **Linux Sandbox**: If running the AppImage or raw tarball on minimal distributions without unprivileged user namespaces, launch with `bharatcode-studio --no-sandbox` if prompted.

@@ -1,0 +1,85 @@
+# Maintainer: BharatCode <support@bharatcode.ai>
+
+pkgname=bharatcode-studio-bin
+pkgver=1.0.0
+pkgrel=1
+pkgdesc="AI code editor powered by BharatCode (binary release)"
+arch=('x86_64' 'aarch64')
+url="https://github.com/BharatCode-ai/bharatcode-studio"
+license=('MIT')
+depends=(
+    'alsa-lib'
+    'at-spi2-core'
+    'cairo'
+    'glib2'
+    'gtk3'
+    'libcups'
+    'libdrm'
+    'libnotify'
+    'libsecret'
+    'libx11'
+    'libxcb'
+    'libxcomposite'
+    'libxdamage'
+    'libxext'
+    'libxfixes'
+    'libxkbcommon'
+    'libxrandr'
+    'mesa'
+    'nspr'
+    'nss'
+    'pango'
+    'systemd-libs'
+)
+optdepends=(
+    'git: version control support'
+    'libvips: image processing support'
+    'xdg-utils: desktop integration and URL opening'
+)
+provides=('bharatcode-studio')
+conflicts=('bharatcode-studio')
+options=('!strip')
+
+_repo="BharatCode-ai/bharatcode-studio"
+source_x86_64=("https://github.com/${_repo}/releases/download/v${pkgver}/bharatcode-studio-linux-x64-${pkgver}.tar.gz")
+source_aarch64=("https://github.com/${_repo}/releases/download/v${pkgver}/bharatcode-studio-linux-arm64-${pkgver}.tar.gz")
+source=("bharatcode-studio.desktop")
+sha256sums=('SKIP')
+sha256sums_x86_64=('SKIP')
+sha256sums_aarch64=('SKIP')
+
+package() {
+    install -d -m 755 "${pkgdir}/opt/bharatcode-studio"
+    install -d -m 755 "${pkgdir}/usr/bin"
+    install -d -m 755 "${pkgdir}/usr/share/applications"
+    install -d -m 755 "${pkgdir}/usr/share/pixmaps"
+
+    local _srcdir
+    if [ "${CARCH}" = "x86_64" ]; then
+        _srcdir="${srcdir}/BharatCode Studio-linux-x64"
+        [ -d "${_srcdir}" ] || _srcdir="${srcdir}/bharatcode-studio-linux-x64"
+        [ -d "${_srcdir}" ] || _srcdir=$(find "${srcdir}" -mindepth 1 -maxdepth 1 -type d ! -name ".*" | head -n 1)
+    else
+        _srcdir="${srcdir}/BharatCode Studio-linux-arm64"
+        [ -d "${_srcdir}" ] || _srcdir="${srcdir}/bharatcode-studio-linux-arm64"
+        [ -d "${_srcdir}" ] || _srcdir=$(find "${srcdir}" -mindepth 1 -maxdepth 1 -type d ! -name ".*" | head -n 1)
+    fi
+
+    cp -r "${_srcdir}"/* "${pkgdir}/opt/bharatcode-studio/"
+    chmod 755 "${pkgdir}/opt/bharatcode-studio/bharatcode-studio" || chmod 755 "${pkgdir}/opt/bharatcode-studio/bin/bharatcode-studio" || true
+
+    # Create binary launcher symlink in /usr/bin
+    if [ -f "${pkgdir}/opt/bharatcode-studio/bin/bharatcode-studio" ]; then
+        ln -sf /opt/bharatcode-studio/bin/bharatcode-studio "${pkgdir}/usr/bin/bharatcode-studio"
+    else
+        ln -sf /opt/bharatcode-studio/bharatcode-studio "${pkgdir}/usr/bin/bharatcode-studio"
+    fi
+
+    # Install desktop entry
+    install -m 644 "${srcdir}/bharatcode-studio.desktop" "${pkgdir}/usr/share/applications/bharatcode-studio.desktop"
+
+    # Install icon if available
+    if [ -f "${pkgdir}/opt/bharatcode-studio/resources/app/resources/linux/code.png" ]; then
+        install -m 644 "${pkgdir}/opt/bharatcode-studio/resources/app/resources/linux/code.png" "${pkgdir}/usr/share/pixmaps/bharatcode-studio.png"
+    fi
+}
