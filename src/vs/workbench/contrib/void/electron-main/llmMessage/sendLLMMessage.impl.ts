@@ -138,8 +138,8 @@ const newOpenAICompatibleSDK = async ({ settingsOfProvider, providerName }: { se
 	}
 	if (providerName === 'bharatcode') {
 		const thisConfig = settingsOfProvider[providerName]
-		const apiKey = thisConfig.apiKey || process.env.BHARATCODE_API_KEY || ''
-		const baseURL = process.env.BHARATCODE_BASE_URL || 'https://bharatcode.ai/api/model/v1'
+		const apiKey = (thisConfig.apiKey || process.env.BHARATCODE_API_KEY || '').trim()
+		const baseURL = (process.env.BHARATCODE_BASE_URL || 'https://bharatcode.ai/api/model/v1').trim()
 		return new OpenAI({ baseURL, apiKey, timeout: 120_000, maxRetries: 2, ...commonPayloadOpts })
 	}
 	else if (providerName === 'openAI') {
