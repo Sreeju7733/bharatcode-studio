@@ -93,10 +93,16 @@ type OpenAIClientFetchArgs = Parameters<NonNullable<ClientOptions['fetch']>>
 
 /** OpenAI typings use node-fetch shapes in Node; Electron uses global fetch — bridge with explicit casts. */
 const openAITolerantFetch = (async (url: OpenAIClientFetchArgs[0], init?: OpenAIClientFetchArgs[1]) => {
-	const res = await globalThis.fetch(
+	let res = await globalThis.fetch(
 		url as string | URL | Request,
 		init as Parameters<typeof globalThis.fetch>[1],
 	)
+	for (let attempt = 0; attempt < 3 && (res.status === 503 || res.status === 502 || res.status === 504); attempt++) {
+		await new Promise(r => setTimeout(r, (attempt + 1) * 3000));
+		try {
+			res = await globalThis.fetch(url as string | URL | Request, init as Parameters<typeof globalThis.fetch>[1]);
+		} catch {}
+	}
 	if (res.ok)
 		return res
 	const rawText = await res.text().catch(() => '')
